@@ -74,16 +74,16 @@ const WelcomeSelector = () => {
             whileHover={{ y: -6, scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleSelect("professional")}
-            className="group relative overflow-hidden rounded-2xl shadow-elevated border border-border/50 hover:border-primary/30 transition-all duration-300 cursor-pointer aspect-[4/5] flex flex-col justify-end"
+            className="group relative overflow-hidden rounded-2xl shadow-elevated border border-border/50 hover:border-primary/30 transition-all duration-300 cursor-pointer flex flex-col text-left"
           >
-            {/* Logo as background */}
-            <div
-              className="absolute inset-0 bg-no-repeat bg-center bg-contain"
-              style={{ backgroundImage: `url(${logoProfessional})` }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-card via-card/70 to-transparent" />
+            {/* Logo area - fully visible */}
+            <div className="flex-1 flex items-center justify-center p-8 min-h-[220px]">
+              <img src={logoProfessional} alt="Aliko Events Professional" className="max-h-40 w-auto object-contain" />
+            </div>
+            {/* Text content */}
+            <div className="bg-card/95 backdrop-blur-sm border-t border-border/30">
 
-            <div className="relative z-10 p-8 lg:p-10">
+            <div className="relative z-10 p-6 lg:p-8">
               <h2 className="text-2xl font-bold text-foreground mb-1">
                 Professional
               </h2>
@@ -110,6 +110,7 @@ const WelcomeSelector = () => {
                 <ArrowRight className="w-4 h-4" />
               </div>
             </div>
+            </div>
           </motion.button>
 
           {/* Social Card */}
@@ -120,16 +121,15 @@ const WelcomeSelector = () => {
             whileHover={{ y: -6, scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleSelect("social")}
-            className="group relative overflow-hidden rounded-2xl shadow-elevated border border-border/50 hover:border-accent/30 transition-all duration-300 cursor-pointer aspect-[4/5] flex flex-col justify-end"
+            className="group relative overflow-hidden rounded-2xl shadow-elevated border border-border/50 hover:border-accent/30 transition-all duration-300 cursor-pointer flex flex-col text-left"
           >
-            {/* Logo as background */}
-            <div
-              className="absolute inset-0 bg-no-repeat bg-center bg-contain"
-              style={{ backgroundImage: `url(${logoSocial})` }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-card via-card/70 to-transparent" />
-
-            <div className="relative z-10 p-8 lg:p-10">
+            {/* Logo area - fully visible */}
+            <div className="flex-1 flex items-center justify-center p-8 min-h-[220px]">
+              <img src={logoSocial} alt="Aliko Events Social" className="max-h-40 w-auto object-contain" />
+            </div>
+            {/* Text content */}
+            <div className="bg-card/95 backdrop-blur-sm border-t border-border/30">
+            <div className="relative z-10 p-6 lg:p-8">
               <h2 className="text-2xl font-bold text-foreground mb-1">
                 Social
               </h2>
@@ -155,6 +155,7 @@ const WelcomeSelector = () => {
                 Enter Social
                 <ArrowRight className="w-4 h-4" />
               </div>
+            </div>
             </div>
           </motion.button>
         </div>

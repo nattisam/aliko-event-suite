@@ -37,7 +37,7 @@ const Navbar = ({ portal }: NavbarProps) => {
   const ctaHref = portal === "professional" ? "/professional/request-proposal" : "/social/book-consultation";
 
   return (
-    <nav className="sticky top-0 z-40 bg-card/80 backdrop-blur-lg border-b border-border">
+    <nav className="sticky top-0 z-40 bg-card border-b border-border">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
         <Link to={`/${portal}`} className="flex items-center gap-2">
           <img src={logo} alt={`Aliko Events ${portal}`} className="h-9 w-auto" />

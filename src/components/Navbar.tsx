@@ -1,0 +1,118 @@
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import logoProfessional from "@/assets/logo-professional.png";
+import logoSocial from "@/assets/logo-social.png";
+
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+interface NavbarProps {
+  portal: "professional" | "social";
+}
+
+const professionalLinks: NavItem[] = [
+  { label: "Home", href: "/professional" },
+  { label: "Browse Events", href: "/professional/events" },
+  { label: "Host an Event", href: "/professional/host" },
+  { label: "Help", href: "/professional/help" },
+];
+
+const socialLinks: NavItem[] = [
+  { label: "Home", href: "/social" },
+  { label: "Templates", href: "/social/templates" },
+  { label: "Create Event", href: "/social/create" },
+  { label: "My Invitations", href: "/social/invitations" },
+  { label: "Help", href: "/social/help" },
+];
+
+const Navbar = ({ portal }: NavbarProps) => {
+  const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const links = portal === "professional" ? professionalLinks : socialLinks;
+  const logo = portal === "professional" ? logoProfessional : logoSocial;
+  const ctaText = portal === "professional" ? "Create Professional Event" : "Create Social Event";
+  const ctaHref = portal === "professional" ? "/professional/host" : "/social/create";
+
+  return (
+    <nav className="sticky top-0 z-40 bg-card/80 backdrop-blur-lg border-b border-border">
+      <div className="container mx-auto flex items-center justify-between h-16 px-4">
+        <Link to={`/${portal}`} className="flex items-center gap-2">
+          <img src={logo} alt={`Aliko Events ${portal}`} className="h-9 w-auto" />
+        </Link>
+
+        {/* Desktop links */}
+        <div className="hidden lg:flex items-center gap-6 font-body text-sm">
+          {links.map((l) => (
+            <Link
+              key={l.href}
+              to={l.href}
+              className={`transition-colors hover:text-primary ${
+                location.pathname === l.href
+                  ? "text-primary font-semibold"
+                  : "text-muted-foreground"
+              }`}
+            >
+              {l.label}
+            </Link>
+          ))}
+        </div>
+
+        <div className="hidden lg:flex items-center gap-3">
+          <Link to={`/${portal}/signin`}>
+            <Button variant="ghost" size="sm" className="font-body">
+              Sign In
+            </Button>
+          </Link>
+          <Link to={ctaHref}>
+            <Button size="sm" className="font-body bg-primary text-primary-foreground hover:bg-primary/90">
+              {ctaText}
+            </Button>
+          </Link>
+        </div>
+
+        {/* Mobile toggle */}
+        <button
+          className="lg:hidden p-2 text-foreground"
+          onClick={() => setOpen(!open)}
+          aria-label="Toggle menu"
+        >
+          {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
+      </div>
+
+      {/* Mobile menu */}
+      {open && (
+        <div className="lg:hidden border-t border-border bg-card px-4 pb-4 pt-2 space-y-2 font-body">
+          {links.map((l) => (
+            <Link
+              key={l.href}
+              to={l.href}
+              onClick={() => setOpen(false)}
+              className="block py-2 text-sm text-foreground hover:text-primary"
+            >
+              {l.label}
+            </Link>
+          ))}
+          <div className="pt-2 flex flex-col gap-2">
+            <Link to={`/${portal}/signin`}>
+              <Button variant="outline" size="sm" className="w-full font-body">
+                Sign In
+              </Button>
+            </Link>
+            <Link to={ctaHref}>
+              <Button size="sm" className="w-full font-body bg-primary text-primary-foreground">
+                {ctaText}
+              </Button>
+            </Link>
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;

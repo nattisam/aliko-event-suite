@@ -74,7 +74,7 @@ const WelcomeSelector = () => {
             whileHover={{ y: -6, scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleSelect("professional")}
-            className="group relative overflow-hidden rounded-2xl shadow-elevated border border-border/50 hover:border-primary/30 transition-all duration-300 cursor-pointer flex flex-col text-left"
+            className="group relative overflow-hidden rounded-2xl shadow-elevated border border-teal/20 hover:border-teal/40 transition-all duration-300 cursor-pointer flex flex-col text-left"
           >
             {/* Logo area - fully visible */}
             <div className="flex-1 flex items-center justify-center p-8 min-h-[220px]">
@@ -93,14 +93,14 @@ const WelcomeSelector = () => {
 
               <ul className="space-y-2 mb-6 font-body">
                 {[
-                  "Conferences & Summits",
-                  "Corporate & Government Events",
-                  "Hybrid & Virtual Programs",
-                  "Exchange & Delegation Events",
+                  { text: "Conferences & Summits", color: "text-teal" },
+                  { text: "Corporate & Government Events", color: "text-indigo" },
+                  { text: "Hybrid & Virtual Programs", color: "text-sky" },
+                  { text: "Exchange & Delegation Events", color: "text-violet" },
                 ].map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-foreground/80">
-                    <Briefcase className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span className="text-sm">{item}</span>
+                  <li key={item.text} className="flex items-center gap-3 text-foreground/80">
+                    <Briefcase className={`w-4 h-4 ${item.color} flex-shrink-0`} />
+                    <span className="text-sm">{item.text}</span>
                   </li>
                 ))}
               </ul>
@@ -121,7 +121,7 @@ const WelcomeSelector = () => {
             whileHover={{ y: -6, scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleSelect("social")}
-            className="group relative overflow-hidden rounded-2xl shadow-elevated border border-border/50 hover:border-accent/30 transition-all duration-300 cursor-pointer flex flex-col text-left"
+            className="group relative overflow-hidden rounded-2xl shadow-elevated border border-rose/20 hover:border-rose/40 transition-all duration-300 cursor-pointer flex flex-col text-left"
           >
             {/* Logo area - fully visible */}
             <div className="flex-1 flex items-center justify-center p-8 min-h-[220px]">
@@ -139,14 +139,14 @@ const WelcomeSelector = () => {
 
               <ul className="space-y-2 mb-6 font-body">
                 {[
-                  "Weddings",
-                  "Birthdays",
-                  "Bridal Showers",
-                  "Graduations & Engagements",
+                  { text: "Weddings", color: "text-rose" },
+                  { text: "Birthdays", color: "text-coral" },
+                  { text: "Bridal Showers", color: "text-violet" },
+                  { text: "Graduations & Engagements", color: "text-amber" },
                 ].map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-foreground/80">
-                    <Heart className="w-4 h-4 text-accent flex-shrink-0" />
-                    <span className="text-sm">{item}</span>
+                  <li key={item.text} className="flex items-center gap-3 text-foreground/80">
+                    <Heart className={`w-4 h-4 ${item.color} flex-shrink-0`} />
+                    <span className="text-sm">{item.text}</span>
                   </li>
                 ))}
               </ul>

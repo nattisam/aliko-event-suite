@@ -3,10 +3,41 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "@/hooks/useAuth";
+import ProtectedRoute from "@/components/ProtectedRoute";
+
+// Pages
 import WelcomeSelector from "./pages/WelcomeSelector";
-import ProfessionalHome from "./pages/professional/ProfessionalHome";
-import SocialHome from "./pages/social/SocialHome";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
+
+// Professional
+import ProfessionalHome from "./pages/professional/ProfessionalHome";
+import BrowseEvents from "./pages/professional/BrowseEvents";
+import EventDetail from "./pages/professional/EventDetail";
+import MyTickets from "./pages/professional/MyTickets";
+
+// Social
+import SocialHome from "./pages/social/SocialHome";
+import SocialTemplates from "./pages/social/SocialTemplates";
+import SocialCreate from "./pages/social/SocialCreate";
+import SocialEventPage from "./pages/social/SocialEventPage";
+import SocialInvitations from "./pages/social/SocialInvitations";
+
+// Admin
+import AdminLayout from "./pages/admin/AdminLayout";
+import AdminOverview from "./pages/admin/AdminOverview";
+import AdminEvents from "./pages/admin/AdminEvents";
+import AdminAttendees from "./pages/admin/AdminAttendees";
+import AdminTickets from "./pages/admin/AdminTickets";
+import AdminRSVPs from "./pages/admin/AdminRSVPs";
+import AdminCheckin from "./pages/admin/AdminCheckin";
+import AdminMessaging from "./pages/admin/AdminMessaging";
+import AdminAnalytics from "./pages/admin/AdminAnalytics";
+import AdminSettings from "./pages/admin/AdminSettings";
 
 const queryClient = new QueryClient();
 
@@ -16,13 +47,46 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<WelcomeSelector />} />
-          <Route path="/professional" element={<ProfessionalHome />} />
-          <Route path="/social" element={<SocialHome />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            {/* Public */}
+            <Route path="/" element={<WelcomeSelector />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+
+            {/* Professional Portal */}
+            <Route path="/professional" element={<ProfessionalHome />} />
+            <Route path="/professional/events" element={<BrowseEvents />} />
+            <Route path="/professional/events/:slug" element={<EventDetail />} />
+            <Route path="/professional/my-tickets" element={<MyTickets />} />
+            <Route path="/professional/signin" element={<SignIn />} />
+
+            {/* Social Portal */}
+            <Route path="/social" element={<SocialHome />} />
+            <Route path="/social/templates" element={<SocialTemplates />} />
+            <Route path="/social/create" element={<SocialCreate />} />
+            <Route path="/social/e/:slug" element={<SocialEventPage />} />
+            <Route path="/social/invitations" element={<SocialInvitations />} />
+            <Route path="/social/signin" element={<SignIn />} />
+
+            {/* Admin Dashboard (Protected) */}
+            <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+              <Route index element={<AdminOverview />} />
+              <Route path="events" element={<AdminEvents />} />
+              <Route path="attendees" element={<AdminAttendees />} />
+              <Route path="tickets" element={<AdminTickets />} />
+              <Route path="rsvps" element={<AdminRSVPs />} />
+              <Route path="checkin" element={<AdminCheckin />} />
+              <Route path="messaging" element={<AdminMessaging />} />
+              <Route path="analytics" element={<AdminAnalytics />} />
+              <Route path="settings" element={<AdminSettings />} />
+            </Route>
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

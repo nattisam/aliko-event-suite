@@ -16,17 +16,16 @@ interface NavbarProps {
 
 const professionalLinks: NavItem[] = [
   { label: "Home", href: "/professional" },
-  { label: "Browse Events", href: "/professional/events" },
-  { label: "Host an Event", href: "/professional/host" },
-  { label: "Help", href: "/professional/help" },
+  { label: "Services", href: "/professional/services" },
+  { label: "Portfolio", href: "/professional/portfolio" },
+  { label: "Events", href: "/professional/events" },
 ];
 
 const socialLinks: NavItem[] = [
   { label: "Home", href: "/social" },
+  { label: "Services", href: "/social/services" },
+  { label: "Gallery", href: "/social/gallery" },
   { label: "Templates", href: "/social/templates" },
-  { label: "Create Event", href: "/social/create" },
-  { label: "My Invitations", href: "/social/invitations" },
-  { label: "Help", href: "/social/help" },
 ];
 
 const Navbar = ({ portal }: NavbarProps) => {
@@ -34,8 +33,8 @@ const Navbar = ({ portal }: NavbarProps) => {
   const location = useLocation();
   const links = portal === "professional" ? professionalLinks : socialLinks;
   const logo = portal === "professional" ? logoProfessional : logoSocial;
-  const ctaText = portal === "professional" ? "Create Professional Event" : "Create Social Event";
-  const ctaHref = portal === "professional" ? "/professional/host" : "/social/create";
+  const ctaText = portal === "professional" ? "Request Proposal" : "Book Consultation";
+  const ctaHref = portal === "professional" ? "/professional/request-proposal" : "/social/book-consultation";
 
   return (
     <nav className="sticky top-0 z-40 bg-card/80 backdrop-blur-lg border-b border-border">

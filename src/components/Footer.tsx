@@ -7,30 +7,52 @@ interface FooterProps {
 const Footer = ({ portal }: FooterProps) => {
   const otherPortal = portal === "professional" ? "social" : "professional";
 
+  const portalLinks = portal === "professional"
+    ? [
+        { label: "Home", href: "/professional" },
+        { label: "Services", href: "/professional/services" },
+        { label: "Portfolio", href: "/professional/portfolio" },
+        { label: "Events", href: "/professional/events" },
+        { label: "Request Proposal", href: "/professional/request-proposal" },
+      ]
+    : [
+        { label: "Home", href: "/social" },
+        { label: "Services", href: "/social/services" },
+        { label: "Gallery", href: "/social/gallery" },
+        { label: "Book Consultation", href: "/social/book-consultation" },
+      ];
+
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className="font-display text-lg font-semibold mb-4">Aliko Events</h3>
-            <p className="text-sm text-primary-foreground/70 font-body leading-relaxed">
-              Connect • Elevate • Inspire
+            <h3 className="font-display text-lg font-semibold mb-2">Aliko Events</h3>
+            <p className="text-sm text-primary-foreground/70 font-body leading-relaxed mb-2">
+              Professional precision. Personal celebration.
+            </p>
+            <p className="text-sm text-primary-foreground/50 font-body">
+              Connect • Inspire • Elevate
             </p>
           </div>
           <div>
             <h4 className="font-body font-semibold text-sm mb-3 text-gold">Platform</h4>
             <ul className="space-y-2 font-body text-sm text-primary-foreground/70">
-              <li><Link to={`/${portal}`} className="hover:text-primary-foreground transition-colors">Home</Link></li>
-              <li><Link to={`/${portal}/events`} className="hover:text-primary-foreground transition-colors">Events</Link></li>
-              <li><Link to={`/${portal}/help`} className="hover:text-primary-foreground transition-colors">Help Center</Link></li>
+              {portalLinks.map((l) => (
+                <li key={l.href}>
+                  <Link to={l.href} className="hover:text-primary-foreground transition-colors">{l.label}</Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div>
             <h4 className="font-body font-semibold text-sm mb-3 text-gold">Company</h4>
             <ul className="space-y-2 font-body text-sm text-primary-foreground/70">
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">About</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Contact</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Privacy</a></li>
+              <li><Link to={`/about?portal=${portal}`} className="hover:text-primary-foreground transition-colors">About</Link></li>
+              <li><Link to={`/testimonials?portal=${portal}`} className="hover:text-primary-foreground transition-colors">Testimonials</Link></li>
+              <li><Link to={`/contact?portal=${portal}`} className="hover:text-primary-foreground transition-colors">Contact</Link></li>
+              <li><a href="#" className="hover:text-primary-foreground transition-colors">Privacy Policy</a></li>
+              <li><a href="#" className="hover:text-primary-foreground transition-colors">Terms</a></li>
             </ul>
           </div>
           <div>

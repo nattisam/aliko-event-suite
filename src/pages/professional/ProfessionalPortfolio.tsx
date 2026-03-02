@@ -14,6 +14,7 @@ const portfolioItems = [
     objective: "Bring together 500+ business leaders across 12 African nations for a 3-day summit on trade and investment.",
     approach: "Full event management including venue sourcing, speaker coordination, multi-track agenda design, and hybrid streaming setup.",
     outcome: "520 attendees, 98% satisfaction rate, 15 partnership deals signed during networking sessions.",
+    color: "border-l-4 border-l-teal",
   },
   {
     title: "Global Education Exchange Forum",
@@ -22,6 +23,7 @@ const portfolioItems = [
     objective: "Facilitate dialogue between education ministries and international development partners.",
     approach: "Protocol-level coordination, VIP delegation management, simultaneous translation, and post-event reporting.",
     outcome: "200+ delegates from 8 countries, 3 new MoUs signed, extensive media coverage across West Africa.",
+    color: "border-l-4 border-l-indigo",
   },
   {
     title: "Tech Career Fair 2024",
@@ -30,6 +32,7 @@ const portfolioItems = [
     objective: "Connect 1,000+ job seekers with top technology employers across East Africa.",
     approach: "Registration and ticketing platform, attendee matching algorithm, onsite operations, and employer booth management.",
     outcome: "1,200 attendees, 45 employers, 300+ interviews conducted on-site.",
+    color: "border-l-4 border-l-coral",
   },
 ];
 
@@ -58,9 +61,9 @@ const ProfessionalPortfolio = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="grid md:grid-cols-2 gap-8 items-center"
+              className={`grid md:grid-cols-2 gap-8 items-center p-6 rounded-xl bg-card border border-border shadow-card ${item.color}`}
             >
-              <div className="aspect-[16/10] rounded-xl overflow-hidden">
+              <div className="aspect-[16/10] rounded-lg overflow-hidden">
                 <img src={heroProfessional} alt={item.title} className="w-full h-full object-cover" loading="lazy" />
               </div>
               <div>

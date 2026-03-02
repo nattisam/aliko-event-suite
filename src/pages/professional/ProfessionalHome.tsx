@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, BarChart3, Users, Ticket, Shield, CheckCircle } from "lucide-react";
+import { ArrowRight, CheckCircle, BarChart3, Users, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -14,18 +14,18 @@ const stats = [
 ];
 
 const services = [
-  { title: "Complete Event Management", desc: "End-to-end planning and execution — concept development, budgeting, vendor coordination, production, and post-event reporting." },
-  { title: "Corporate & Institutional Events", desc: "Executive meetings, milestone celebrations, stakeholder gatherings, training programs, and award ceremonies." },
-  { title: "Conferences & Summits", desc: "Multi-track programs, speaker coordination, sponsorship integration, and delegate engagement strategies." },
-  { title: "Hybrid & Virtual Events", desc: "Seamless integration of in-person and digital experiences with engagement-focused design." },
-  { title: "Product & Media Launches", desc: "Strategically produced launch experiences that elevate brand visibility and stakeholder impact." },
-  { title: "VIP Protocol & Delegation Support", desc: "High-level event coordination with attention to detail, protocol, and guest experience." },
+  { title: "Complete Event Management", desc: "End-to-end planning and execution — concept development, budgeting, vendor coordination, production, and post-event reporting.", color: "bg-teal/10 text-teal border-teal/20" },
+  { title: "Corporate & Institutional Events", desc: "Executive meetings, milestone celebrations, stakeholder gatherings, training programs, and award ceremonies.", color: "bg-indigo/10 text-indigo border-indigo/20" },
+  { title: "Conferences & Summits", desc: "Multi-track programs, speaker coordination, sponsorship integration, and delegate engagement strategies.", color: "bg-coral/10 text-coral border-coral/20" },
+  { title: "Hybrid & Virtual Events", desc: "Seamless integration of in-person and digital experiences with engagement-focused design.", color: "bg-sky/10 text-sky border-sky/20" },
+  { title: "Product & Media Launches", desc: "Strategically produced launch experiences that elevate brand visibility and stakeholder impact.", color: "bg-violet/10 text-violet border-violet/20" },
+  { title: "VIP Protocol & Delegation Support", desc: "High-level event coordination with attention to detail, protocol, and guest experience.", color: "bg-amber/10 text-amber border-amber/20" },
 ];
 
 const steps = [
-  { num: "01", title: "Discover & Strategize", desc: "We understand your objectives, audience, and success metrics." },
-  { num: "02", title: "Plan & Produce", desc: "We manage timelines, vendors, budgets, and every operational detail." },
-  { num: "03", title: "Deliver & Report", desc: "We execute flawlessly and provide post-event insights and reporting." },
+  { num: "01", title: "Discover & Strategize", desc: "We understand your objectives, audience, and success metrics.", color: "text-teal" },
+  { num: "02", title: "Plan & Produce", desc: "We manage timelines, vendors, budgets, and every operational detail.", color: "text-indigo" },
+  { num: "03", title: "Deliver & Report", desc: "We execute flawlessly and provide post-event insights and reporting.", color: "text-coral" },
 ];
 
 const ProfessionalHome = () => {
@@ -98,22 +98,28 @@ const ProfessionalHome = () => {
           Everything you need to create, manage, and grow professional events.
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((s, i) => (
-            <motion.div
-              key={s.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-              className="p-6 rounded-xl bg-card border border-border shadow-card"
-            >
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                <CheckCircle className="w-5 h-5 text-primary" />
-              </div>
-              <h3 className="font-display text-lg font-semibold text-foreground mb-2">{s.title}</h3>
-              <p className="text-sm text-muted-foreground font-body leading-relaxed">{s.desc}</p>
-            </motion.div>
-          ))}
+          {services.map((s, i) => {
+            const colorParts = s.color.split(" ");
+            const bgClass = colorParts[0];
+            const textClass = colorParts[1];
+            const borderClass = colorParts[2];
+            return (
+              <motion.div
+                key={s.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className={`p-6 rounded-xl bg-card border shadow-card hover:shadow-elevated transition-all duration-300 ${borderClass}`}
+              >
+                <div className={`w-10 h-10 rounded-lg ${bgClass} flex items-center justify-center mb-4`}>
+                  <CheckCircle className={`w-5 h-5 ${textClass}`} />
+                </div>
+                <h3 className="font-display text-lg font-semibold text-foreground mb-2">{s.title}</h3>
+                <p className="text-sm text-muted-foreground font-body leading-relaxed">{s.desc}</p>
+              </motion.div>
+            );
+          })}
         </div>
         <div className="text-center mt-10">
           <Link to="/professional/services">
@@ -139,7 +145,7 @@ const ProfessionalHome = () => {
                 transition={{ delay: i * 0.15 }}
                 className="text-center"
               >
-                <span className="text-5xl font-display font-bold text-gradient-gold">{s.num}</span>
+                <span className={`text-5xl font-display font-bold ${s.color}`}>{s.num}</span>
                 <h3 className="font-display text-xl font-semibold text-foreground mt-4 mb-2">{s.title}</h3>
                 <p className="text-sm text-muted-foreground font-body">{s.desc}</p>
               </motion.div>
@@ -154,9 +160,9 @@ const ProfessionalHome = () => {
           <h2 className="text-3xl font-bold text-primary-foreground text-center mb-12">What Our Clients Say</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { name: "Amara Obi", role: "Conference Director", quote: "Aliko Events delivered our annual summit flawlessly. Their team handled every detail with professionalism and clarity." },
-              { name: "David Mensah", role: "HR Manager", quote: "The career fair tools and attendee matching saved us countless hours of coordination." },
-              { name: "Fatima Al-Hassan", role: "Education Lead", quote: "From ticketing to analytics, everything just works beautifully. A truly professional experience." },
+              { name: "Amara Obi", role: "Conference Director", quote: "Aliko Events delivered our annual summit flawlessly. Their team handled every detail with professionalism and clarity.", accent: "border-l-4 border-l-teal" },
+              { name: "David Mensah", role: "HR Manager", quote: "The career fair tools and attendee matching saved us countless hours of coordination.", accent: "border-l-4 border-l-coral" },
+              { name: "Fatima Al-Hassan", role: "Education Lead", quote: "From ticketing to analytics, everything just works beautifully. A truly professional experience.", accent: "border-l-4 border-l-indigo" },
             ].map((t, i) => (
               <motion.div
                 key={t.name}
@@ -164,7 +170,7 @@ const ProfessionalHome = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="p-6 rounded-xl bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/10"
+                className={`p-6 rounded-xl bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/10 ${t.accent}`}
               >
                 <p className="text-primary-foreground/90 font-body text-sm leading-relaxed mb-4">"{t.quote}"</p>
                 <div>

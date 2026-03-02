@@ -7,12 +7,12 @@ import Footer from "@/components/Footer";
 import heroSocial from "@/assets/hero-social.jpg";
 
 const galleryItems = [
-  { title: "Elegant Garden Wedding", category: "Wedding" },
-  { title: "Golden 50th Birthday", category: "Birthday" },
-  { title: "Blush Bridal Shower", category: "Bridal Shower" },
-  { title: "Graduation Gala", category: "Graduation" },
-  { title: "Romantic Engagement Dinner", category: "Engagement" },
-  { title: "Rooftop Anniversary", category: "Anniversary" },
+  { title: "Elegant Garden Wedding", category: "Wedding", color: "bg-rose text-primary-foreground" },
+  { title: "Golden 50th Birthday", category: "Birthday", color: "bg-coral text-primary-foreground" },
+  { title: "Blush Bridal Shower", category: "Bridal Shower", color: "bg-violet text-primary-foreground" },
+  { title: "Graduation Gala", category: "Graduation", color: "bg-indigo text-primary-foreground" },
+  { title: "Romantic Engagement Dinner", category: "Engagement", color: "bg-amber text-primary-foreground" },
+  { title: "Rooftop Anniversary", category: "Anniversary", color: "bg-teal text-primary-foreground" },
 ];
 
 const SocialGallery = () => {
@@ -48,7 +48,7 @@ const SocialGallery = () => {
               <img src={heroSocial} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
-                <span className="inline-block px-2 py-0.5 text-xs font-body rounded-full bg-accent/90 text-accent-foreground mb-2">{item.category}</span>
+                <span className={`inline-block px-3 py-1 text-xs font-body font-semibold rounded-full mb-2 ${item.color}`}>{item.category}</span>
                 <h3 className="font-display text-lg font-semibold text-primary-foreground">{item.title}</h3>
               </div>
             </motion.div>

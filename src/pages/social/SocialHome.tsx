@@ -7,17 +7,17 @@ import Footer from "@/components/Footer";
 import heroSocial from "@/assets/hero-social.jpg";
 
 const eventTypes = [
-  { icon: Heart, label: "Weddings" },
-  { icon: PartyPopper, label: "Birthdays" },
-  { icon: Sparkles, label: "Bridal Showers" },
-  { icon: Gem, label: "Engagements" },
-  { icon: GraduationCap, label: "Graduations" },
+  { icon: Heart, label: "Weddings", color: "bg-rose/10 text-rose border-rose/20" },
+  { icon: PartyPopper, label: "Birthdays", color: "bg-coral/10 text-coral border-coral/20" },
+  { icon: Sparkles, label: "Bridal Showers", color: "bg-violet/10 text-violet border-violet/20" },
+  { icon: Gem, label: "Engagements", color: "bg-amber/10 text-amber border-amber/20" },
+  { icon: GraduationCap, label: "Graduations", color: "bg-indigo/10 text-indigo border-indigo/20" },
 ];
 
 const packages = [
-  { title: "Full-Service Planning", desc: "We manage everything — concept, vendors, timeline, coordination, and full execution." },
-  { title: "Partial Planning", desc: "We step in where you need support, refine your plans, and manage final execution." },
-  { title: "Day-Of Coordination", desc: "We oversee vendor arrivals, manage the timeline, and ensure smooth event flow." },
+  { title: "Full-Service Planning", desc: "We manage everything — concept, vendors, timeline, coordination, and full execution.", color: "border-t-4 border-t-rose" },
+  { title: "Partial Planning", desc: "We step in where you need support, refine your plans, and manage final execution.", color: "border-t-4 border-t-violet" },
+  { title: "Day-Of Coordination", desc: "We oversee vendor arrivals, manage the timeline, and ensure smooth event flow.", color: "border-t-4 border-t-teal" },
 ];
 
 const SocialHome = () => {
@@ -66,21 +66,24 @@ const SocialHome = () => {
         <h2 className="text-3xl font-bold text-foreground text-center mb-4">Events We Plan</h2>
         <p className="text-center text-muted-foreground font-body mb-12">Choose your celebration type</p>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {eventTypes.map((t, i) => (
-            <motion.div
-              key={t.label}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className="flex flex-col items-center gap-3 p-6 bg-card rounded-xl shadow-card border border-border hover:border-accent/30 hover:shadow-elevated transition-all cursor-pointer group"
-            >
-              <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
-                <t.icon className="w-7 h-7 text-accent" />
-              </div>
-              <span className="text-sm font-semibold font-body text-foreground">{t.label}</span>
-            </motion.div>
-          ))}
+          {eventTypes.map((t, i) => {
+            const parts = t.color.split(" ");
+            return (
+              <motion.div
+                key={t.label}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className={`flex flex-col items-center gap-3 p-6 bg-card rounded-xl shadow-card border hover:shadow-elevated transition-all cursor-pointer group ${parts[2]}`}
+              >
+                <div className={`w-14 h-14 rounded-full ${parts[0]} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                  <t.icon className={`w-7 h-7 ${parts[1]}`} />
+                </div>
+                <span className="text-sm font-semibold font-body text-foreground">{t.label}</span>
+              </motion.div>
+            );
+          })}
         </div>
       </section>
 
@@ -96,7 +99,7 @@ const SocialHome = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="p-6 rounded-xl bg-card border border-border shadow-card text-center"
+                className={`p-6 rounded-xl bg-card border border-border shadow-card hover:shadow-elevated transition-all text-center ${p.color}`}
               >
                 <h3 className="font-display text-xl font-semibold text-foreground mb-3">{p.title}</h3>
                 <p className="text-sm text-muted-foreground font-body leading-relaxed">{p.desc}</p>
@@ -120,9 +123,9 @@ const SocialHome = () => {
           <h2 className="text-3xl font-bold text-primary-foreground text-center mb-12">What Our Clients Say</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { name: "Chioma Eze", event: "Wedding", quote: "Aliko Events made our wedding day absolutely magical. Every detail was perfect." },
-              { name: "Kwame Asante", event: "Birthday", quote: "My 40th birthday celebration was beyond anything I imagined. The team was incredible." },
-              { name: "Nadia Bello", event: "Graduation", quote: "They handled everything so I could just enjoy my daughter's graduation party stress-free." },
+              { name: "Chioma Eze", event: "Wedding", quote: "Aliko Events made our wedding day absolutely magical. Every detail was perfect.", accent: "border-l-4 border-l-rose" },
+              { name: "Kwame Asante", event: "Birthday", quote: "My 40th birthday celebration was beyond anything I imagined. The team was incredible.", accent: "border-l-4 border-l-coral" },
+              { name: "Nadia Bello", event: "Graduation", quote: "They handled everything so I could just enjoy my daughter's graduation party stress-free.", accent: "border-l-4 border-l-indigo" },
             ].map((t, i) => (
               <motion.div
                 key={t.name}
@@ -130,7 +133,7 @@ const SocialHome = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="p-6 rounded-xl bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/10"
+                className={`p-6 rounded-xl bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/10 ${t.accent}`}
               >
                 <p className="text-primary-foreground/90 font-body text-sm leading-relaxed mb-4">"{t.quote}"</p>
                 <div>

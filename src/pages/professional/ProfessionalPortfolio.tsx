@@ -4,7 +4,6 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import heroProfessional from "@/assets/hero-professional.jpg";
 
 const portfolioItems = [
   {
@@ -14,7 +13,9 @@ const portfolioItems = [
     objective: "Bring together 500+ business leaders across 12 African nations for a 3-day summit on trade and investment.",
     approach: "Full event management including venue sourcing, speaker coordination, multi-track agenda design, and hybrid streaming setup.",
     outcome: "520 attendees, 98% satisfaction rate, 15 partnership deals signed during networking sessions.",
-    color: "border-l-4 border-l-teal",
+    image: "/images/business-summit.jpg",
+    accent: "border-l-4 border-l-teal",
+    badge: "bg-teal",
   },
   {
     title: "Global Education Exchange Forum",
@@ -23,7 +24,9 @@ const portfolioItems = [
     objective: "Facilitate dialogue between education ministries and international development partners.",
     approach: "Protocol-level coordination, VIP delegation management, simultaneous translation, and post-event reporting.",
     outcome: "200+ delegates from 8 countries, 3 new MoUs signed, extensive media coverage across West Africa.",
-    color: "border-l-4 border-l-indigo",
+    image: "/images/education-forum.jpg",
+    accent: "border-l-4 border-l-indigo",
+    badge: "bg-indigo",
   },
   {
     title: "Tech Career Fair 2024",
@@ -32,7 +35,9 @@ const portfolioItems = [
     objective: "Connect 1,000+ job seekers with top technology employers across East Africa.",
     approach: "Registration and ticketing platform, attendee matching algorithm, onsite operations, and employer booth management.",
     outcome: "1,200 attendees, 45 employers, 300+ interviews conducted on-site.",
-    color: "border-l-4 border-l-coral",
+    image: "/images/tech-fair.jpg",
+    accent: "border-l-4 border-l-coral",
+    badge: "bg-coral",
   },
 ];
 
@@ -61,14 +66,17 @@ const ProfessionalPortfolio = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className={`grid md:grid-cols-2 gap-8 items-center p-6 rounded-xl bg-card border border-border shadow-card ${item.color}`}
+              className={`grid md:grid-cols-2 gap-0 rounded-xl overflow-hidden bg-card border border-border shadow-card ${item.accent}`}
             >
-              <div className="aspect-[16/10] rounded-lg overflow-hidden">
-                <img src={heroProfessional} alt={item.title} className="w-full h-full object-cover" loading="lazy" />
+              <div className="aspect-[16/10] md:aspect-auto overflow-hidden">
+                <img src={item.image} alt={item.title} className="w-full h-full object-cover" loading="lazy" />
               </div>
-              <div>
+              <div className="p-8 flex flex-col justify-center">
+                <span className={`inline-block self-start px-3 py-1 text-xs font-body font-semibold rounded-full text-primary-foreground mb-3 ${item.badge}`}>
+                  {item.year}
+                </span>
                 <h3 className="font-display text-2xl font-bold text-foreground mb-1">{item.title}</h3>
-                <p className="text-sm text-muted-foreground font-body mb-4">{item.location} | {item.year}</p>
+                <p className="text-sm text-muted-foreground font-body mb-4">{item.location}</p>
                 <div className="space-y-3 font-body text-sm">
                   <div>
                     <span className="font-semibold text-foreground">Objective: </span>

@@ -4,15 +4,14 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import heroSocial from "@/assets/hero-social.jpg";
 
 const galleryItems = [
-  { title: "Elegant Garden Wedding", category: "Wedding", color: "bg-rose text-primary-foreground" },
-  { title: "Golden 50th Birthday", category: "Birthday", color: "bg-coral text-primary-foreground" },
-  { title: "Blush Bridal Shower", category: "Bridal Shower", color: "bg-violet text-primary-foreground" },
-  { title: "Graduation Gala", category: "Graduation", color: "bg-indigo text-primary-foreground" },
-  { title: "Romantic Engagement Dinner", category: "Engagement", color: "bg-amber text-primary-foreground" },
-  { title: "Rooftop Anniversary", category: "Anniversary", color: "bg-teal text-primary-foreground" },
+  { title: "Elegant Garden Wedding", category: "Wedding", image: "/images/wedding.jpg", color: "bg-rose text-primary-foreground" },
+  { title: "Golden 50th Birthday", category: "Birthday", image: "/images/birthday.jpg", color: "bg-coral text-primary-foreground" },
+  { title: "Blush Bridal Shower", category: "Bridal Shower", image: "/images/bridal-shower.jpg", color: "bg-violet text-primary-foreground" },
+  { title: "Graduation Gala", category: "Graduation", image: "/images/graduation.jpg", color: "bg-indigo text-primary-foreground" },
+  { title: "Romantic Engagement Dinner", category: "Engagement", image: "/images/engagement.jpg", color: "bg-amber text-primary-foreground" },
+  { title: "Rooftop Anniversary", category: "Anniversary", image: "/images/anniversary.jpg", color: "bg-teal text-primary-foreground" },
 ];
 
 const SocialGallery = () => {
@@ -45,7 +44,7 @@ const SocialGallery = () => {
               transition={{ delay: i * 0.08 }}
               className="relative aspect-[4/5] rounded-xl overflow-hidden bg-card border border-border shadow-card group cursor-pointer"
             >
-              <img src={heroSocial} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+              <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
                 <span className={`inline-block px-3 py-1 text-xs font-body font-semibold rounded-full mb-2 ${item.color}`}>{item.category}</span>

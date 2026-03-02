@@ -14,23 +14,23 @@ const whyChoose = [
 ];
 
 const coreServices = [
-  { icon: ClipboardList, title: "Complete Event Management", desc: "We manage every aspect of your event — from concept development and vendor sourcing to onsite execution and final reporting.", color: "bg-teal/10 text-teal border-teal/20" },
-  { icon: Award, title: "Corporate & Government Events", desc: "We design professional events aligned with institutional standards, stakeholder expectations, and policy requirements.", color: "bg-indigo/10 text-indigo border-indigo/20" },
-  { icon: Globe, title: "Hybrid & Virtual Event Production", desc: "We combine production quality, digital engagement tools, and audience interaction to create dynamic hybrid experiences.", color: "bg-sky/10 text-sky border-sky/20" },
-  { icon: Mic, title: "Launch & Media Events", desc: "We deliver launch events designed to amplify brand presence and engage press, partners, and clients.", color: "bg-coral/10 text-coral border-coral/20" },
-  { icon: Users, title: "Conferences & Multi-Day Programs", desc: "We manage multi-session, multi-speaker, multi-day conferences with precision and structure.", color: "bg-violet/10 text-violet border-violet/20" },
-  { icon: BarChart3, title: "Ceremonies & Official Inaugurations", desc: "Protocol-conscious events with structured sequencing and seamless coordination.", color: "bg-amber/10 text-amber border-amber/20" },
+  { icon: ClipboardList, title: "Complete Event Management", desc: "We manage every aspect of your event — from concept development and vendor sourcing to onsite execution and final reporting.", image: "/images/conference-hall.jpg", accent: "border-t-4 border-t-teal" },
+  { icon: Award, title: "Corporate & Government Events", desc: "We design professional events aligned with institutional standards, stakeholder expectations, and policy requirements.", image: "/images/corporate-event.jpg", accent: "border-t-4 border-t-indigo" },
+  { icon: Globe, title: "Hybrid & Virtual Event Production", desc: "We combine production quality, digital engagement tools, and audience interaction to create dynamic hybrid experiences.", image: "/images/hybrid-event.jpg", accent: "border-t-4 border-t-sky" },
+  { icon: Mic, title: "Launch & Media Events", desc: "We deliver launch events designed to amplify brand presence and engage press, partners, and clients.", image: "/images/media-launch.jpg", accent: "border-t-4 border-t-coral" },
+  { icon: Users, title: "Conferences & Multi-Day Programs", desc: "We manage multi-session, multi-speaker, multi-day conferences with precision and structure.", image: "/images/summit-stage.jpg", accent: "border-t-4 border-t-violet" },
+  { icon: BarChart3, title: "Ceremonies & Official Inaugurations", desc: "Protocol-conscious events with structured sequencing and seamless coordination.", image: "/images/vip-protocol.jpg", accent: "border-t-4 border-t-amber" },
 ];
 
 const coverageGrid = [
-  { text: "Event Strategy & Concept", color: "border-l-4 border-l-teal" },
-  { text: "Budget Development & Procurement", color: "border-l-4 border-l-indigo" },
-  { text: "Registration & Ticketing", color: "border-l-4 border-l-coral" },
-  { text: "Agenda & Speaker Management", color: "border-l-4 border-l-sky" },
-  { text: "Vendor & Venue Coordination", color: "border-l-4 border-l-violet" },
-  { text: "VIP & Protocol Support", color: "border-l-4 border-l-amber" },
-  { text: "Onsite Operations & Staffing", color: "border-l-4 border-l-emerald" },
-  { text: "Post-Event Reporting & Analytics", color: "border-l-4 border-l-rose" },
+  { text: "Event Strategy & Concept", color: "border-l-4 border-l-teal bg-teal/5" },
+  { text: "Budget Development & Procurement", color: "border-l-4 border-l-indigo bg-indigo/5" },
+  { text: "Registration & Ticketing", color: "border-l-4 border-l-coral bg-coral/5" },
+  { text: "Agenda & Speaker Management", color: "border-l-4 border-l-sky bg-sky/5" },
+  { text: "Vendor & Venue Coordination", color: "border-l-4 border-l-violet bg-violet/5" },
+  { text: "VIP & Protocol Support", color: "border-l-4 border-l-amber bg-amber/5" },
+  { text: "Onsite Operations & Staffing", color: "border-l-4 border-l-emerald bg-emerald/5" },
+  { text: "Post-Event Reporting & Analytics", color: "border-l-4 border-l-rose bg-rose/5" },
 ];
 
 const ProfessionalServices = () => {
@@ -74,35 +74,37 @@ const ProfessionalServices = () => {
         </div>
       </section>
 
-      {/* Core Services */}
+      {/* Core Services — with thumbnails */}
       <section className="bg-muted py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-foreground text-center mb-12">Core Services</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {coreServices.map((s, i) => {
-              const parts = s.color.split(" ");
-              return (
-                <motion.div
-                  key={s.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  className={`p-6 rounded-xl bg-card border shadow-card hover:shadow-elevated transition-all duration-300 ${parts[2]}`}
-                >
-                  <div className={`w-12 h-12 rounded-lg ${parts[0]} flex items-center justify-center mb-4`}>
-                    <s.icon className={`w-6 h-6 ${parts[1]}`} />
+            {coreServices.map((s, i) => (
+              <motion.div
+                key={s.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className={`rounded-xl bg-card border border-border shadow-card hover:shadow-elevated transition-all duration-300 overflow-hidden group ${s.accent}`}
+              >
+                <div className="aspect-[16/9] overflow-hidden">
+                  <img src={s.image} alt={s.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <s.icon className="w-5 h-5 text-muted-foreground" />
+                    <h3 className="font-display text-lg font-semibold text-foreground">{s.title}</h3>
                   </div>
-                  <h3 className="font-display text-lg font-semibold text-foreground mb-2">{s.title}</h3>
                   <p className="text-sm text-muted-foreground font-body leading-relaxed">{s.desc}</p>
-                </motion.div>
-              );
-            })}
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Coverage Grid */}
+      {/* Coverage Grid — colorful backgrounds */}
       <section className="container mx-auto px-4 py-20">
         <h2 className="text-3xl font-bold text-foreground text-center mb-4">All Bases Covered</h2>
         <p className="text-center text-muted-foreground font-body mb-12 max-w-xl mx-auto">
@@ -116,7 +118,7 @@ const ProfessionalServices = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className={`p-4 rounded-lg bg-card border border-border text-left shadow-card hover:shadow-elevated transition-all ${item.color}`}
+              className={`p-4 rounded-lg border border-border text-left shadow-card hover:shadow-elevated transition-all ${item.color}`}
             >
               <span className="text-sm font-semibold font-body text-foreground">{item.text}</span>
             </motion.div>

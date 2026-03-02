@@ -13,15 +13,24 @@ import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Testimonials from "./pages/Testimonials";
 
 // Professional
 import ProfessionalHome from "./pages/professional/ProfessionalHome";
+import ProfessionalServices from "./pages/professional/ProfessionalServices";
+import ProfessionalPortfolio from "./pages/professional/ProfessionalPortfolio";
+import RequestProposal from "./pages/professional/RequestProposal";
 import BrowseEvents from "./pages/professional/BrowseEvents";
 import EventDetail from "./pages/professional/EventDetail";
 import MyTickets from "./pages/professional/MyTickets";
 
 // Social
 import SocialHome from "./pages/social/SocialHome";
+import SocialServices from "./pages/social/SocialServices";
+import SocialGallery from "./pages/social/SocialGallery";
+import BookConsultation from "./pages/social/BookConsultation";
 import SocialTemplates from "./pages/social/SocialTemplates";
 import SocialCreate from "./pages/social/SocialCreate";
 import SocialEventPage from "./pages/social/SocialEventPage";
@@ -55,9 +64,15 @@ const App = () => (
             <Route path="/signup" element={<SignUp />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/testimonials" element={<Testimonials />} />
 
             {/* Professional Portal */}
             <Route path="/professional" element={<ProfessionalHome />} />
+            <Route path="/professional/services" element={<ProfessionalServices />} />
+            <Route path="/professional/portfolio" element={<ProfessionalPortfolio />} />
+            <Route path="/professional/request-proposal" element={<RequestProposal />} />
             <Route path="/professional/events" element={<BrowseEvents />} />
             <Route path="/professional/events/:slug" element={<EventDetail />} />
             <Route path="/professional/my-tickets" element={<MyTickets />} />
@@ -65,6 +80,9 @@ const App = () => (
 
             {/* Social Portal */}
             <Route path="/social" element={<SocialHome />} />
+            <Route path="/social/services" element={<SocialServices />} />
+            <Route path="/social/gallery" element={<SocialGallery />} />
+            <Route path="/social/book-consultation" element={<BookConsultation />} />
             <Route path="/social/templates" element={<SocialTemplates />} />
             <Route path="/social/create" element={<SocialCreate />} />
             <Route path="/social/e/:slug" element={<SocialEventPage />} />

@@ -57,11 +57,11 @@ const WelcomeSelector = () => {
           transition={{ duration: 0.7 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 tracking-tight">
+           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 tracking-tight">
             Welcome to Aliko Events
           </h1>
           <p className="text-lg sm:text-xl text-gold-light font-body font-light tracking-wide">
-            Choose your experience
+            Professional precision or personal celebration — choose your experience.
           </p>
         </motion.div>
 
@@ -85,18 +85,18 @@ const WelcomeSelector = () => {
 
             <div className="relative z-10 p-6 lg:p-8">
               <h2 className="text-2xl font-bold text-foreground mb-1">
-                Professional
+                Aliko Events Professional
               </h2>
               <p className="text-sm text-muted-foreground font-body mb-5">
-                Enterprise events & conferences
+                Strategic events. Flawless execution. Measurable impact.
               </p>
 
               <ul className="space-y-2 mb-6 font-body">
                 {[
                   "Conferences & Summits",
-                  "Networking Events",
-                  "Exchange Programs",
-                  "Business & Education",
+                  "Corporate & Government Events",
+                  "Hybrid & Virtual Programs",
+                  "Exchange & Delegation Events",
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-3 text-foreground/80">
                     <Briefcase className="w-4 h-4 text-primary flex-shrink-0" />
@@ -131,18 +131,18 @@ const WelcomeSelector = () => {
             <div className="bg-card/95 backdrop-blur-sm border-t border-border/30">
             <div className="relative z-10 p-6 lg:p-8">
               <h2 className="text-2xl font-bold text-foreground mb-1">
-                Social
+                Aliko Events Social
               </h2>
               <p className="text-sm text-muted-foreground font-body mb-5">
-                Celebrate life's moments
+                Beautiful celebrations, thoughtfully planned.
               </p>
 
               <ul className="space-y-2 mb-6 font-body">
                 {[
-                  "Weddings & Engagements",
-                  "Birthdays & Milestones",
-                  "Bridal & Baby Showers",
-                  "Graduations",
+                  "Weddings",
+                  "Birthdays",
+                  "Bridal Showers",
+                  "Graduations & Engagements",
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-3 text-foreground/80">
                     <Heart className="w-4 h-4 text-accent flex-shrink-0" />
@@ -166,7 +166,7 @@ const WelcomeSelector = () => {
           transition={{ delay: 0.8 }}
           className="text-center text-primary-foreground/50 text-sm font-body mt-10"
         >
-          Connect • Elevate • Inspire
+          Connect • Inspire • Elevate
         </motion.p>
       </div>
     </div>

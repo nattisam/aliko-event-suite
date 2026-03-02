@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Heart, Sparkles, Gift, GraduationCap, PartyPopper, Gem } from "lucide-react";
+import { ArrowRight, Heart, Sparkles, GraduationCap, PartyPopper, Gem, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -14,10 +14,10 @@ const eventTypes = [
   { icon: GraduationCap, label: "Graduations" },
 ];
 
-const steps = [
-  { num: "01", title: "Choose a Template", desc: "Browse beautiful, curated designs for your event type" },
-  { num: "02", title: "Add Your Details", desc: "Customize with your event info, photos, and RSVP questions" },
-  { num: "03", title: "Send Invites", desc: "Share your link and track RSVPs in real time" },
+const packages = [
+  { title: "Full-Service Planning", desc: "We manage everything — concept, vendors, timeline, coordination, and full execution." },
+  { title: "Partial Planning", desc: "We step in where you need support, refine your plans, and manage final execution." },
+  { title: "Day-Of Coordination", desc: "We oversee vendor arrivals, manage the timeline, and ensure smooth event flow." },
 ];
 
 const SocialHome = () => {
@@ -39,21 +39,21 @@ const SocialHome = () => {
             className="max-w-2xl"
           >
             <h1 className="text-4xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight">
-              Celebrate Life's Most Beautiful Moments
+              Celebrate beautifully. We'll handle the rest.
             </h1>
             <p className="text-lg text-primary-foreground/80 font-body mb-8 leading-relaxed">
-              Create stunning invitations, manage RSVPs, and make every gathering unforgettable.
+              From weddings to milestone celebrations, we plan meaningful experiences so you can enjoy every moment.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link to="/social/create">
+              <Link to="/social/book-consultation">
                 <Button size="lg" className="font-body bg-accent text-accent-foreground hover:bg-accent/90 shadow-gold">
-                  Create Your Invite
+                  Book Consultation
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
-              <Link to="/social/templates">
+              <Link to="/social/services">
                 <Button size="lg" variant="outline" className="font-body border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
-                  Browse Templates
+                  Explore Packages
                 </Button>
               </Link>
             </div>
@@ -63,8 +63,8 @@ const SocialHome = () => {
 
       {/* Event Types */}
       <section className="container mx-auto px-4 py-20">
-        <h2 className="text-3xl font-bold text-foreground text-center mb-4">What Are You Celebrating?</h2>
-        <p className="text-center text-muted-foreground font-body mb-12">Choose your event type to get started</p>
+        <h2 className="text-3xl font-bold text-foreground text-center mb-4">Events We Plan</h2>
+        <p className="text-center text-muted-foreground font-body mb-12">Choose your celebration type</p>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           {eventTypes.map((t, i) => (
             <motion.div
@@ -84,34 +84,29 @@ const SocialHome = () => {
         </div>
       </section>
 
-      {/* Template Gallery Preview */}
+      {/* Planning Packages */}
       <section className="bg-muted py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-foreground text-center mb-4">Beautiful Templates</h2>
-          <p className="text-center text-muted-foreground font-body mb-12">Professionally designed for every occasion</p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {["Elegant Gold", "Garden Romance", "Modern Minimal"].map((name, i) => (
+          <h2 className="text-3xl font-bold text-foreground text-center mb-12">Planning Packages</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {packages.map((p, i) => (
               <motion.div
-                key={name}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                key={p.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="relative aspect-[4/5] rounded-xl overflow-hidden bg-card border border-border shadow-card group cursor-pointer"
+                className="p-6 rounded-xl bg-card border border-border shadow-card text-center"
               >
-                <img src={heroSocial} alt={name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <h3 className="font-display text-lg font-semibold text-primary-foreground">{name}</h3>
-                  <p className="text-xs text-primary-foreground/70 font-body">Wedding Template</p>
-                </div>
+                <h3 className="font-display text-xl font-semibold text-foreground mb-3">{p.title}</h3>
+                <p className="text-sm text-muted-foreground font-body leading-relaxed">{p.desc}</p>
               </motion.div>
             ))}
           </div>
           <div className="text-center mt-8">
-            <Link to="/social/templates">
+            <Link to="/social/services">
               <Button variant="outline" className="font-body">
-                View All Templates
+                View All Services
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
@@ -119,36 +114,15 @@ const SocialHome = () => {
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="container mx-auto px-4 py-20">
-        <h2 className="text-3xl font-bold text-foreground text-center mb-12">How It Works</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {steps.map((s, i) => (
-            <motion.div
-              key={s.num}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              className="text-center"
-            >
-              <span className="text-5xl font-display font-bold text-gradient-gold">{s.num}</span>
-              <h3 className="font-display text-xl font-semibold text-foreground mt-4 mb-2">{s.title}</h3>
-              <p className="text-sm text-muted-foreground font-body">{s.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
       {/* Testimonials */}
       <section className="bg-primary py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-primary-foreground text-center mb-12">Loved by Hosts</h2>
+          <h2 className="text-3xl font-bold text-primary-foreground text-center mb-12">What Our Clients Say</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { name: "Chioma Eze", event: "Wedding", quote: "Our guests couldn't stop complimenting the beautiful invitation. RSVPs were so easy!" },
-              { name: "Kwame Asante", event: "Birthday", quote: "Setting up my 40th birthday invite took 10 minutes. The templates are gorgeous." },
-              { name: "Nadia Bello", event: "Graduation", quote: "Tracking RSVPs and meal preferences saved me so much stress." },
+              { name: "Chioma Eze", event: "Wedding", quote: "Aliko Events made our wedding day absolutely magical. Every detail was perfect." },
+              { name: "Kwame Asante", event: "Birthday", quote: "My 40th birthday celebration was beyond anything I imagined. The team was incredible." },
+              { name: "Nadia Bello", event: "Graduation", quote: "They handled everything so I could just enjoy my daughter's graduation party stress-free." },
             ].map((t, i) => (
               <motion.div
                 key={t.name}
@@ -173,14 +147,14 @@ const SocialHome = () => {
       <section className="container mx-auto px-4 py-20 text-center">
         <Gift className="w-12 h-12 text-accent mx-auto mb-4" />
         <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-          Make Your Next Event Unforgettable
+          Let's plan your celebration.
         </h2>
         <p className="text-muted-foreground font-body mb-8 max-w-md mx-auto">
-          Beautiful invitations, seamless RSVPs, and everything you need — all free to start.
+          Beautiful moments deserve thoughtful planning. Let's create something unforgettable together.
         </p>
-        <Link to="/social/create">
+        <Link to="/social/book-consultation">
           <Button size="lg" className="font-body bg-accent text-accent-foreground hover:bg-accent/90 shadow-gold">
-            Create Your Event
+            Book Consultation
             <ArrowRight className="ml-2 w-4 h-4" />
           </Button>
         </Link>

@@ -74,41 +74,41 @@ const WelcomeSelector = () => {
             whileHover={{ y: -6, scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleSelect("professional")}
-            className="group relative bg-card/95 backdrop-blur-md rounded-2xl p-8 lg:p-10 text-left shadow-elevated border border-border/50 hover:border-primary/30 transition-all duration-300 cursor-pointer"
+            className="group relative overflow-hidden rounded-2xl shadow-elevated border border-border/50 hover:border-primary/30 transition-all duration-300 cursor-pointer aspect-[4/5] flex flex-col justify-end"
           >
-            <div className="flex items-start gap-5 mb-6">
-              <img
-                src={logoProfessional}
-                alt="Aliko Events Professional logo"
-                className="w-28 h-28 object-contain rounded-2xl shadow-md"
-              />
-              <div>
-                <h2 className="text-2xl font-bold text-foreground mb-1">
-                  Professional
-                </h2>
-                <p className="text-sm text-muted-foreground font-body">
-                  Enterprise events & conferences
-                </p>
+            {/* Logo as background */}
+            <div
+              className="absolute inset-0 bg-no-repeat bg-center bg-contain"
+              style={{ backgroundImage: `url(${logoProfessional})` }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-card via-card/70 to-transparent" />
+
+            <div className="relative z-10 p-8 lg:p-10">
+              <h2 className="text-2xl font-bold text-foreground mb-1">
+                Professional
+              </h2>
+              <p className="text-sm text-muted-foreground font-body mb-5">
+                Enterprise events & conferences
+              </p>
+
+              <ul className="space-y-2 mb-6 font-body">
+                {[
+                  "Conferences & Summits",
+                  "Networking Events",
+                  "Exchange Programs",
+                  "Business & Education",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-3 text-foreground/80">
+                    <Briefcase className="w-4 h-4 text-primary flex-shrink-0" />
+                    <span className="text-sm">{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="flex items-center gap-2 text-primary font-semibold font-body group-hover:gap-3 transition-all">
+                Enter Professional
+                <ArrowRight className="w-4 h-4" />
               </div>
-            </div>
-
-            <ul className="space-y-3 mb-8 font-body">
-              {[
-                "Conferences & Summits",
-                "Networking Events",
-                "Exchange Programs",
-                "Business & Education",
-              ].map((item) => (
-                <li key={item} className="flex items-center gap-3 text-foreground/80">
-                  <Briefcase className="w-4 h-4 text-primary flex-shrink-0" />
-                  <span className="text-sm">{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="flex items-center gap-2 text-primary font-semibold font-body group-hover:gap-3 transition-all">
-              Enter Professional
-              <ArrowRight className="w-4 h-4" />
             </div>
           </motion.button>
 
@@ -120,41 +120,41 @@ const WelcomeSelector = () => {
             whileHover={{ y: -6, scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleSelect("social")}
-            className="group relative bg-card/95 backdrop-blur-md rounded-2xl p-8 lg:p-10 text-left shadow-elevated border border-border/50 hover:border-accent/30 transition-all duration-300 cursor-pointer"
+            className="group relative overflow-hidden rounded-2xl shadow-elevated border border-border/50 hover:border-accent/30 transition-all duration-300 cursor-pointer aspect-[4/5] flex flex-col justify-end"
           >
-            <div className="flex items-start gap-5 mb-6">
-              <img
-                src={logoSocial}
-                alt="Aliko Events Social logo"
-                className="w-28 h-28 object-contain rounded-2xl shadow-md"
-              />
-              <div>
-                <h2 className="text-2xl font-bold text-foreground mb-1">
-                  Social
-                </h2>
-                <p className="text-sm text-muted-foreground font-body">
-                  Celebrate life's moments
-                </p>
+            {/* Logo as background */}
+            <div
+              className="absolute inset-0 bg-no-repeat bg-center bg-contain"
+              style={{ backgroundImage: `url(${logoSocial})` }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-card via-card/70 to-transparent" />
+
+            <div className="relative z-10 p-8 lg:p-10">
+              <h2 className="text-2xl font-bold text-foreground mb-1">
+                Social
+              </h2>
+              <p className="text-sm text-muted-foreground font-body mb-5">
+                Celebrate life's moments
+              </p>
+
+              <ul className="space-y-2 mb-6 font-body">
+                {[
+                  "Weddings & Engagements",
+                  "Birthdays & Milestones",
+                  "Bridal & Baby Showers",
+                  "Graduations",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-3 text-foreground/80">
+                    <Heart className="w-4 h-4 text-accent flex-shrink-0" />
+                    <span className="text-sm">{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="flex items-center gap-2 text-accent font-semibold font-body group-hover:gap-3 transition-all">
+                Enter Social
+                <ArrowRight className="w-4 h-4" />
               </div>
-            </div>
-
-            <ul className="space-y-3 mb-8 font-body">
-              {[
-                "Weddings & Engagements",
-                "Birthdays & Milestones",
-                "Bridal & Baby Showers",
-                "Graduations",
-              ].map((item) => (
-                <li key={item} className="flex items-center gap-3 text-foreground/80">
-                  <Heart className="w-4 h-4 text-accent flex-shrink-0" />
-                  <span className="text-sm">{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="flex items-center gap-2 text-accent font-semibold font-body group-hover:gap-3 transition-all">
-              Enter Social
-              <ArrowRight className="w-4 h-4" />
             </div>
           </motion.button>
         </div>

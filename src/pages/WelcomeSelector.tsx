@@ -80,7 +80,7 @@ const WelcomeSelector = () => {
               <img
                 src={logoProfessional}
                 alt="Aliko Events Professional logo"
-                className="w-16 h-16 object-contain rounded-xl"
+                className="w-28 h-28 object-contain rounded-2xl shadow-md"
               />
               <div>
                 <h2 className="text-2xl font-bold text-foreground mb-1">
@@ -126,7 +126,7 @@ const WelcomeSelector = () => {
               <img
                 src={logoSocial}
                 alt="Aliko Events Social logo"
-                className="w-16 h-16 object-contain rounded-xl"
+                className="w-28 h-28 object-contain rounded-2xl shadow-md"
               />
               <div>
                 <h2 className="text-2xl font-bold text-foreground mb-1">

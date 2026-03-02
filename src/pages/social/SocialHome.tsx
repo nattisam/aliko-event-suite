@@ -52,7 +52,7 @@ const SocialHome = () => {
                 </Button>
               </Link>
               <Link to="/social/services">
-                <Button size="lg" variant="outline" className="font-body border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
+                <Button size="lg" variant="outline" className="font-body border-primary-foreground text-primary-foreground bg-primary-foreground/10 hover:bg-primary-foreground/20">
                   Explore Packages
                 </Button>
               </Link>

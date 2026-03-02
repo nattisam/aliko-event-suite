@@ -6,17 +6,17 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const mainPackages = [
-  { title: "Full-Service Planning", desc: "From the first idea to the final send-off, we manage vendors, decor, timelines, budgets, and on-site coordination.", icon: Heart, color: "bg-rose/10 text-rose border-t-4 border-t-rose" },
-  { title: "Partial Planning", desc: "Ideal for hosts who have started planning and need expert guidance to bring it all together.", icon: Users, color: "bg-violet/10 text-violet border-t-4 border-t-violet" },
-  { title: "Day-Of Coordination", desc: "Enjoy your event while we handle logistics, setup, timeline management, and vendor coordination.", icon: Clock, color: "bg-teal/10 text-teal border-t-4 border-t-teal" },
+  { title: "Full-Service Planning", desc: "From the first idea to the final send-off, we manage vendors, decor, timelines, budgets, and on-site coordination.", icon: Heart, image: "/images/full-service.jpg", accent: "border-t-4 border-t-rose" },
+  { title: "Partial Planning", desc: "Ideal for hosts who have started planning and need expert guidance to bring it all together.", icon: Users, image: "/images/partial-planning.jpg", accent: "border-t-4 border-t-violet" },
+  { title: "Day-Of Coordination", desc: "Enjoy your event while we handle logistics, setup, timeline management, and vendor coordination.", icon: Clock, image: "/images/day-of.jpg", accent: "border-t-4 border-t-teal" },
 ];
 
 const addOns = [
-  { text: "Decor & Design Styling", color: "text-rose bg-rose/10" },
-  { text: "Vendor Sourcing", color: "text-amber bg-amber/10" },
-  { text: "Guest RSVP Management", color: "text-indigo bg-indigo/10" },
-  { text: "Seating & Flow Planning", color: "text-teal bg-teal/10" },
-  { text: "Timeline Development", color: "text-violet bg-violet/10" },
+  { text: "Decor & Design Styling", color: "text-rose bg-rose/10", bg: "bg-rose/5" },
+  { text: "Vendor Sourcing", color: "text-amber bg-amber/10", bg: "bg-amber/5" },
+  { text: "Guest RSVP Management", color: "text-indigo bg-indigo/10", bg: "bg-indigo/5" },
+  { text: "Seating & Flow Planning", color: "text-teal bg-teal/10", bg: "bg-teal/5" },
+  { text: "Timeline Development", color: "text-violet bg-violet/10", bg: "bg-violet/5" },
 ];
 
 const SocialServices = () => {
@@ -37,25 +37,24 @@ const SocialServices = () => {
 
       <section className="container mx-auto px-4 py-20">
         <div className="grid md:grid-cols-3 gap-6">
-          {mainPackages.map((p, i) => {
-            const parts = p.color.split(" ");
-            return (
-              <motion.div
-                key={p.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className={`p-8 rounded-xl bg-card border border-border shadow-card hover:shadow-elevated transition-all text-center ${parts.slice(2).join(" ")}`}
-              >
-                <div className={`w-14 h-14 rounded-full ${parts[0]} flex items-center justify-center mx-auto mb-4`}>
-                  <p.icon className={`w-7 h-7 ${parts[1]}`} />
-                </div>
+          {mainPackages.map((p, i) => (
+            <motion.div
+              key={p.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className={`rounded-xl bg-card border border-border shadow-card hover:shadow-elevated transition-all overflow-hidden group ${p.accent}`}
+            >
+              <div className="aspect-[16/9] overflow-hidden">
+                <img src={p.image} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+              </div>
+              <div className="p-6 text-center">
                 <h3 className="font-display text-xl font-semibold text-foreground mb-3">{p.title}</h3>
                 <p className="text-sm text-muted-foreground font-body leading-relaxed">{p.desc}</p>
-              </motion.div>
-            );
-          })}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -72,7 +71,7 @@ const SocialServices = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.06 }}
-                  className="flex items-center gap-4 p-4 rounded-lg bg-card border border-border"
+                  className={`flex items-center gap-4 p-4 rounded-lg border border-border ${item.bg}`}
                 >
                   <div className={`w-8 h-8 rounded-full ${bgColor} flex items-center justify-center flex-shrink-0`}>
                     <Palette className={`w-4 h-4 ${textColor}`} />

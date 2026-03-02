@@ -7,17 +7,17 @@ import Footer from "@/components/Footer";
 import heroSocial from "@/assets/hero-social.jpg";
 
 const eventTypes = [
-  { icon: Heart, label: "Weddings", color: "bg-rose/10 text-rose border-rose/20" },
-  { icon: PartyPopper, label: "Birthdays", color: "bg-coral/10 text-coral border-coral/20" },
-  { icon: Sparkles, label: "Bridal Showers", color: "bg-violet/10 text-violet border-violet/20" },
-  { icon: Gem, label: "Engagements", color: "bg-amber/10 text-amber border-amber/20" },
-  { icon: GraduationCap, label: "Graduations", color: "bg-indigo/10 text-indigo border-indigo/20" },
+  { icon: Heart, label: "Weddings", image: "/images/wedding.jpg", color: "border-rose/30" },
+  { icon: PartyPopper, label: "Birthdays", image: "/images/birthday.jpg", color: "border-coral/30" },
+  { icon: Sparkles, label: "Bridal Showers", image: "/images/bridal-shower.jpg", color: "border-violet/30" },
+  { icon: Gem, label: "Engagements", image: "/images/engagement.jpg", color: "border-amber/30" },
+  { icon: GraduationCap, label: "Graduations", image: "/images/graduation.jpg", color: "border-indigo/30" },
 ];
 
 const packages = [
-  { title: "Full-Service Planning", desc: "We manage everything — concept, vendors, timeline, coordination, and full execution.", color: "border-t-4 border-t-rose" },
-  { title: "Partial Planning", desc: "We step in where you need support, refine your plans, and manage final execution.", color: "border-t-4 border-t-violet" },
-  { title: "Day-Of Coordination", desc: "We oversee vendor arrivals, manage the timeline, and ensure smooth event flow.", color: "border-t-4 border-t-teal" },
+  { title: "Full-Service Planning", desc: "We manage everything — concept, vendors, timeline, coordination, and full execution.", image: "/images/full-service.jpg", accent: "border-t-4 border-t-rose" },
+  { title: "Partial Planning", desc: "We step in where you need support, refine your plans, and manage final execution.", image: "/images/partial-planning.jpg", accent: "border-t-4 border-t-violet" },
+  { title: "Day-Of Coordination", desc: "We oversee vendor arrivals, manage the timeline, and ensure smooth event flow.", image: "/images/day-of.jpg", accent: "border-t-4 border-t-teal" },
 ];
 
 const SocialHome = () => {
@@ -61,33 +61,32 @@ const SocialHome = () => {
         </div>
       </section>
 
-      {/* Event Types */}
+      {/* Event Types — with thumbnails */}
       <section className="container mx-auto px-4 py-20">
         <h2 className="text-3xl font-bold text-foreground text-center mb-4">Events We Plan</h2>
         <p className="text-center text-muted-foreground font-body mb-12">Choose your celebration type</p>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {eventTypes.map((t, i) => {
-            const parts = t.color.split(" ");
-            return (
-              <motion.div
-                key={t.label}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className={`flex flex-col items-center gap-3 p-6 bg-card rounded-xl shadow-card border hover:shadow-elevated transition-all cursor-pointer group ${parts[2]}`}
-              >
-                <div className={`w-14 h-14 rounded-full ${parts[0]} flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                  <t.icon className={`w-7 h-7 ${parts[1]}`} />
-                </div>
+          {eventTypes.map((t, i) => (
+            <motion.div
+              key={t.label}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.05 }}
+              className={`rounded-xl overflow-hidden bg-card shadow-card border ${t.color} hover:shadow-elevated transition-all cursor-pointer group`}
+            >
+              <div className="aspect-[4/3] overflow-hidden">
+                <img src={t.image} alt={t.label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+              </div>
+              <div className="p-4 text-center">
                 <span className="text-sm font-semibold font-body text-foreground">{t.label}</span>
-              </motion.div>
-            );
-          })}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
-      {/* Planning Packages */}
+      {/* Planning Packages — with thumbnails */}
       <section className="bg-muted py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-foreground text-center mb-12">Planning Packages</h2>
@@ -99,10 +98,15 @@ const SocialHome = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`p-6 rounded-xl bg-card border border-border shadow-card hover:shadow-elevated transition-all text-center ${p.color}`}
+                className={`rounded-xl bg-card border border-border shadow-card hover:shadow-elevated transition-all overflow-hidden group ${p.accent}`}
               >
-                <h3 className="font-display text-xl font-semibold text-foreground mb-3">{p.title}</h3>
-                <p className="text-sm text-muted-foreground font-body leading-relaxed">{p.desc}</p>
+                <div className="aspect-[16/9] overflow-hidden">
+                  <img src={p.image} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                </div>
+                <div className="p-6 text-center">
+                  <h3 className="font-display text-xl font-semibold text-foreground mb-3">{p.title}</h3>
+                  <p className="text-sm text-muted-foreground font-body leading-relaxed">{p.desc}</p>
+                </div>
               </motion.div>
             ))}
           </div>

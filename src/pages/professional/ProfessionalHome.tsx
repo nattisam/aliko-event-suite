@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle, BarChart3, Users, Shield } from "lucide-react";
+import { ArrowRight, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -14,18 +14,18 @@ const stats = [
 ];
 
 const services = [
-  { title: "Complete Event Management", desc: "End-to-end planning and execution — concept development, budgeting, vendor coordination, production, and post-event reporting.", color: "bg-teal/10 text-teal border-teal/20" },
-  { title: "Corporate & Institutional Events", desc: "Executive meetings, milestone celebrations, stakeholder gatherings, training programs, and award ceremonies.", color: "bg-indigo/10 text-indigo border-indigo/20" },
-  { title: "Conferences & Summits", desc: "Multi-track programs, speaker coordination, sponsorship integration, and delegate engagement strategies.", color: "bg-coral/10 text-coral border-coral/20" },
-  { title: "Hybrid & Virtual Events", desc: "Seamless integration of in-person and digital experiences with engagement-focused design.", color: "bg-sky/10 text-sky border-sky/20" },
-  { title: "Product & Media Launches", desc: "Strategically produced launch experiences that elevate brand visibility and stakeholder impact.", color: "bg-violet/10 text-violet border-violet/20" },
-  { title: "VIP Protocol & Delegation Support", desc: "High-level event coordination with attention to detail, protocol, and guest experience.", color: "bg-amber/10 text-amber border-amber/20" },
+  { title: "Complete Event Management", desc: "End-to-end planning and execution — concept development, budgeting, vendor coordination, production, and post-event reporting.", image: "/images/conference-hall.jpg", accent: "border-t-4 border-t-teal", badge: "bg-teal text-primary-foreground" },
+  { title: "Corporate & Institutional Events", desc: "Executive meetings, milestone celebrations, stakeholder gatherings, training programs, and award ceremonies.", image: "/images/corporate-event.jpg", accent: "border-t-4 border-t-indigo", badge: "bg-indigo text-primary-foreground" },
+  { title: "Conferences & Summits", desc: "Multi-track programs, speaker coordination, sponsorship integration, and delegate engagement strategies.", image: "/images/summit-stage.jpg", accent: "border-t-4 border-t-coral", badge: "bg-coral text-primary-foreground" },
+  { title: "Hybrid & Virtual Events", desc: "Seamless integration of in-person and digital experiences with engagement-focused design.", image: "/images/hybrid-event.jpg", accent: "border-t-4 border-t-sky", badge: "bg-sky text-primary-foreground" },
+  { title: "Product & Media Launches", desc: "Strategically produced launch experiences that elevate brand visibility and stakeholder impact.", image: "/images/media-launch.jpg", accent: "border-t-4 border-t-violet", badge: "bg-violet text-primary-foreground" },
+  { title: "VIP Protocol & Delegation Support", desc: "High-level event coordination with attention to detail, protocol, and guest experience.", image: "/images/vip-protocol.jpg", accent: "border-t-4 border-t-amber", badge: "bg-amber text-primary-foreground" },
 ];
 
 const steps = [
-  { num: "01", title: "Discover & Strategize", desc: "We understand your objectives, audience, and success metrics.", color: "text-teal" },
-  { num: "02", title: "Plan & Produce", desc: "We manage timelines, vendors, budgets, and every operational detail.", color: "text-indigo" },
-  { num: "03", title: "Deliver & Report", desc: "We execute flawlessly and provide post-event insights and reporting.", color: "text-coral" },
+  { num: "01", title: "Discover & Strategize", desc: "We understand your objectives, audience, and success metrics.", color: "text-teal", bg: "bg-teal/10" },
+  { num: "02", title: "Plan & Produce", desc: "We manage timelines, vendors, budgets, and every operational detail.", color: "text-indigo", bg: "bg-indigo/10" },
+  { num: "03", title: "Deliver & Report", desc: "We execute flawlessly and provide post-event insights and reporting.", color: "text-coral", bg: "bg-coral/10" },
 ];
 
 const ProfessionalHome = () => {
@@ -91,35 +91,31 @@ const ProfessionalHome = () => {
         </div>
       </section>
 
-      {/* Services Preview */}
+      {/* Services Preview — with thumbnails */}
       <section className="container mx-auto px-4 py-20">
         <h2 className="text-3xl font-bold text-foreground text-center mb-4">Comprehensive Event Management Services</h2>
         <p className="text-center text-muted-foreground font-body mb-12 max-w-xl mx-auto">
           Everything you need to create, manage, and grow professional events.
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((s, i) => {
-            const colorParts = s.color.split(" ");
-            const bgClass = colorParts[0];
-            const textClass = colorParts[1];
-            const borderClass = colorParts[2];
-            return (
-              <motion.div
-                key={s.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className={`p-6 rounded-xl bg-card border shadow-card hover:shadow-elevated transition-all duration-300 ${borderClass}`}
-              >
-                <div className={`w-10 h-10 rounded-lg ${bgClass} flex items-center justify-center mb-4`}>
-                  <CheckCircle className={`w-5 h-5 ${textClass}`} />
-                </div>
+          {services.map((s, i) => (
+            <motion.div
+              key={s.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              className={`rounded-xl bg-card border border-border shadow-card hover:shadow-elevated transition-all duration-300 overflow-hidden group ${s.accent}`}
+            >
+              <div className="aspect-[16/9] overflow-hidden">
+                <img src={s.image} alt={s.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+              </div>
+              <div className="p-6">
                 <h3 className="font-display text-lg font-semibold text-foreground mb-2">{s.title}</h3>
                 <p className="text-sm text-muted-foreground font-body leading-relaxed">{s.desc}</p>
-              </motion.div>
-            );
-          })}
+              </div>
+            </motion.div>
+          ))}
         </div>
         <div className="text-center mt-10">
           <Link to="/professional/services">
@@ -131,7 +127,7 @@ const ProfessionalHome = () => {
         </div>
       </section>
 
-      {/* How We Work */}
+      {/* How We Work — colorful backgrounds */}
       <section className="bg-muted py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-foreground text-center mb-12">How We Work</h2>
@@ -143,7 +139,7 @@ const ProfessionalHome = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.15 }}
-                className="text-center"
+                className={`text-center p-8 rounded-2xl ${s.bg} border border-border`}
               >
                 <span className={`text-5xl font-display font-bold ${s.color}`}>{s.num}</span>
                 <h3 className="font-display text-xl font-semibold text-foreground mt-4 mb-2">{s.title}</h3>

@@ -120,7 +120,7 @@ const WelcomeSelector = () => {
             <span className="text-primary-foreground/50 mx-3">—</span>
             <span className="text-rose">personal celebration</span>
           </p>
-          <p className="text-sm sm:text-base text-accent font-body font-light mt-2 tracking-wide italic">
+          <p className="text-lg sm:text-2xl text-accent font-body font-bold mt-3 tracking-widest uppercase">
             Choose your experience
           </p>
         </motion.div>

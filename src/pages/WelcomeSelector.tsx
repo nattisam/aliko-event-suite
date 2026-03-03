@@ -76,15 +76,15 @@ const WelcomeSelector = () => {
           playsInline
           preload={i === 0 ? "auto" : "metadata"}
           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
-          style={{ opacity: i === activeIndex ? 0.2 : 0 }}
+          style={{ opacity: i === activeIndex ? 0.45 : 0 }}
         >
           <source src={src} type="video/mp4" />
         </video>
       ))}
 
       {/* Heavy dark overlay for card readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(152,50%,3%)]/50 via-[hsl(152,50%,3%)]/75 to-[hsl(152,50%,3%)]/95" />
-      <div className="absolute inset-0 bg-[hsl(152,50%,3%)]/40" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(152,50%,3%)]/30 via-[hsl(152,50%,3%)]/55 to-[hsl(152,50%,3%)]/80" />
+      <div className="absolute inset-0 bg-[hsl(152,50%,3%)]/20" />
 
       {/* Continue banner */}
       {lastVisit && (
@@ -115,7 +115,7 @@ const WelcomeSelector = () => {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 tracking-tight">
             Welcome to Aliko Events
           </h1>
-          <p className="text-lg sm:text-xl text-primary-foreground/40 font-body font-light tracking-wide">
+          <p className="text-lg sm:text-xl text-primary-foreground/70 font-body font-light tracking-wide">
             Professional precision or personal celebration — choose your experience.
           </p>
         </motion.div>
@@ -137,7 +137,7 @@ const WelcomeSelector = () => {
             <div className="border-t border-primary-foreground/5 bg-[hsl(152,30%,4%)]/90">
               <div className="p-6 lg:p-8">
                 <h2 className="text-2xl font-bold text-primary-foreground mb-1">Aliko Events Professional</h2>
-                <p className="text-sm text-primary-foreground/35 font-body mb-5">Strategic events. Flawless execution. Measurable impact.</p>
+                <p className="text-sm text-primary-foreground/60 font-body mb-5">Strategic events. Flawless execution. Measurable impact.</p>
                 <ul className="space-y-2 mb-6 font-body">
                   {[
                     { text: "Conferences & Summits", color: "text-teal" },
@@ -145,7 +145,7 @@ const WelcomeSelector = () => {
                     { text: "Hybrid & Virtual Programs", color: "text-sky" },
                     { text: "Exchange & Delegation Events", color: "text-violet" },
                   ].map((item) => (
-                    <li key={item.text} className="flex items-center gap-3 text-primary-foreground/55">
+                    <li key={item.text} className="flex items-center gap-3 text-primary-foreground/75">
                       <Briefcase className={`w-4 h-4 ${item.color} flex-shrink-0`} />
                       <span className="text-sm">{item.text}</span>
                     </li>
@@ -175,7 +175,7 @@ const WelcomeSelector = () => {
             <div className="border-t border-primary-foreground/5 bg-[hsl(152,30%,4%)]/90">
               <div className="p-6 lg:p-8">
                 <h2 className="text-2xl font-bold text-primary-foreground mb-1">Aliko Events Social</h2>
-                <p className="text-sm text-primary-foreground/35 font-body mb-5">Beautiful celebrations, thoughtfully planned.</p>
+                <p className="text-sm text-primary-foreground/60 font-body mb-5">Beautiful celebrations, thoughtfully planned.</p>
                 <ul className="space-y-2 mb-6 font-body">
                   {[
                     { text: "Weddings", color: "text-rose" },
@@ -183,7 +183,7 @@ const WelcomeSelector = () => {
                     { text: "Bridal Showers", color: "text-violet" },
                     { text: "Graduations & Engagements", color: "text-amber" },
                   ].map((item) => (
-                    <li key={item.text} className="flex items-center gap-3 text-primary-foreground/55">
+                    <li key={item.text} className="flex items-center gap-3 text-primary-foreground/75">
                       <Heart className={`w-4 h-4 ${item.color} flex-shrink-0`} />
                       <span className="text-sm">{item.text}</span>
                     </li>

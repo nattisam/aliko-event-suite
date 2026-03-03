@@ -76,15 +76,15 @@ const WelcomeSelector = () => {
           playsInline
           preload={i === 0 ? "auto" : "metadata"}
           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
-          style={{ opacity: i === activeIndex ? 0.45 : 0 }}
+          style={{ opacity: i === activeIndex ? 0.55 : 0 }}
         >
           <source src={src} type="video/mp4" />
         </video>
       ))}
 
       {/* Heavy dark overlay for card readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(152,50%,3%)]/30 via-[hsl(152,50%,3%)]/55 to-[hsl(152,50%,3%)]/80" />
-      <div className="absolute inset-0 bg-[hsl(152,50%,3%)]/20" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(152,50%,3%)]/20 via-[hsl(152,50%,3%)]/45 to-[hsl(152,50%,3%)]/70" />
+      <div className="absolute inset-0 bg-[hsl(152,50%,3%)]/15" />
 
       {/* Continue banner */}
       {lastVisit && (
@@ -115,7 +115,7 @@ const WelcomeSelector = () => {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 tracking-tight">
             Welcome to Aliko Events
           </h1>
-          <p className="text-lg sm:text-xl text-primary-foreground/70 font-body font-light tracking-wide">
+          <p className="text-lg sm:text-xl text-primary-foreground/90 font-body font-light tracking-wide">
             Professional precision or personal celebration — choose your experience.
           </p>
         </motion.div>

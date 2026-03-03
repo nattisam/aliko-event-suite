@@ -15,6 +15,7 @@ const categoryCards = [
   { name: "Graduation", image: "/images/graduation.jpg", color: "bg-indigo" },
   { name: "Engagement", image: "/images/engagement.jpg", color: "bg-amber" },
   { name: "Anniversary", image: "/images/anniversary.jpg", color: "bg-teal" },
+  { name: "Celebration", image: "/images/celebration.jpg", color: "bg-coral" },
 ];
 
 const SocialGallery = () => {

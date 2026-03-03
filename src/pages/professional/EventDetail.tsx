@@ -24,7 +24,7 @@ const EventDetail = () => {
   const { data: event, isLoading } = useQuery({
     queryKey: ["event", slug],
     queryFn: async () => {
-      const { data } = await supabase.from("events").select("*").eq("slug", slug!).single();
+      const { data } = await supabase.from("events").select("id, title, slug, description, type, status, privacy, start_datetime, end_datetime, location_name, location_address, location_map_url, host_name, cover_image_url, theme_template_id, timezone, created_by, created_at, updated_at").eq("slug", slug!).single();
       return data;
     },
     enabled: !!slug,

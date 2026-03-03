@@ -15,7 +15,7 @@ const SocialInvitations = () => {
     queryFn: async () => {
       const { data } = await supabase
         .from("events")
-        .select("*")
+        .select("id, title, slug, description, type, status, privacy, start_datetime, end_datetime, location_name, location_address, location_map_url, host_name, cover_image_url, theme_template_id, timezone, created_by, created_at, updated_at")
         .eq("type", "social")
         .eq("created_by", user!.id)
         .order("created_at", { ascending: false });

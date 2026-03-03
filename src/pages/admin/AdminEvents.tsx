@@ -24,7 +24,7 @@ const AdminEvents = () => {
   const { data: events, isLoading } = useQuery({
     queryKey: ["admin-events"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("events").select("*").eq("created_by", user!.id).order("created_at", { ascending: false });
+      const { data, error } = await supabase.from("events").select("id, title, slug, description, type, status, privacy, start_datetime, end_datetime, location_name, location_address, location_map_url, host_name, cover_image_url, theme_template_id, timezone, created_by, created_at, updated_at").eq("created_by", user!.id).order("created_at", { ascending: false });
       if (error) throw error;
       return data;
     },

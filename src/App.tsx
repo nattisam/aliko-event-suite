@@ -46,6 +46,7 @@ import AdminRSVPs from "./pages/admin/AdminRSVPs";
 import AdminCheckin from "./pages/admin/AdminCheckin";
 import AdminMessaging from "./pages/admin/AdminMessaging";
 import AdminAnalytics from "./pages/admin/AdminAnalytics";
+import AdminMedia from "./pages/admin/AdminMedia";
 import AdminSettings from "./pages/admin/AdminSettings";
 
 const queryClient = new QueryClient();
@@ -98,6 +99,7 @@ const App = () => (
               <Route path="rsvps" element={<AdminRSVPs />} />
               <Route path="checkin" element={<AdminCheckin />} />
               <Route path="messaging" element={<AdminMessaging />} />
+              <Route path="media" element={<AdminMedia />} />
               <Route path="analytics" element={<AdminAnalytics />} />
               <Route path="settings" element={<AdminSettings />} />
             </Route>

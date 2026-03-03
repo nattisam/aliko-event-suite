@@ -168,6 +168,48 @@ export type Database = {
           },
         ]
       }
+      portfolio_media: {
+        Row: {
+          category: string
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          media_type: string
+          media_url: string
+          portal: string
+          sort_order: number
+          thumbnail_url: string | null
+          title: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          media_type: string
+          media_url: string
+          portal: string
+          sort_order?: number
+          thumbnail_url?: string | null
+          title: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          media_type?: string
+          media_url?: string
+          portal?: string
+          sort_order?: number
+          thumbnail_url?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null

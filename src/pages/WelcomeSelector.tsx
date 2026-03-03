@@ -112,11 +112,16 @@ const WelcomeSelector = () => {
           transition={{ duration: 0.7 }}
           className="text-center mb-14"
         >
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 tracking-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 tracking-tight">
             Welcome to Aliko Events
           </h1>
-          <p className="text-lg sm:text-xl text-primary-foreground/90 font-body font-light tracking-wide">
-            Professional precision or personal celebration — choose your experience.
+          <p className="text-lg sm:text-xl font-body font-medium tracking-widest uppercase">
+            <span className="text-teal">Professional precision</span>
+            <span className="text-primary-foreground/50 mx-3">—</span>
+            <span className="text-rose">personal celebration</span>
+          </p>
+          <p className="text-sm sm:text-base text-accent font-body font-light mt-2 tracking-wide italic">
+            Choose your experience
           </p>
         </motion.div>
 

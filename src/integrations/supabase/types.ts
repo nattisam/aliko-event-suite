@@ -455,6 +455,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      verify_event_password: {
+        Args: { _event_id: string; _password: string }
+        Returns: boolean
+      }
     }
     Enums: {
       app_role:

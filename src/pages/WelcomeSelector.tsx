@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Briefcase, Heart, ArrowRight } from "lucide-react";
 import logoProfessional from "@/assets/logo-professional.png";
 import logoSocial from "@/assets/logo-social.png";
-import welcomeBg from "@/assets/welcome-bg.jpg";
 
 const WelcomeSelector = () => {
   const navigate = useNavigate();
@@ -22,12 +21,18 @@ const WelcomeSelector = () => {
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-      {/* Background */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${welcomeBg})` }}
-      />
-      <div className="absolute inset-0 bg-green-dark/60" />
+      {/* Video Background */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+        poster="/images/wedding.jpg"
+      >
+        <source src="/videos/welcome-bg.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-green-dark/70" />
 
       {/* Continue banner */}
       {lastVisit && (

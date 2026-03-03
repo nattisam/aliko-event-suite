@@ -1,23 +1,31 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Heart, Sparkles, GraduationCap, PartyPopper, Gem, Gift } from "lucide-react";
+import { ArrowRight, Heart, Sparkles, Star, Clock, Palette, Gift, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import heroSocial from "@/assets/hero-social.jpg";
 
-const eventTypes = [
-  { icon: Heart, label: "Weddings", image: "/images/wedding.jpg", color: "border-rose/30" },
-  { icon: PartyPopper, label: "Birthdays", image: "/images/birthday.jpg", color: "border-coral/30" },
-  { icon: Sparkles, label: "Bridal Showers", image: "/images/bridal-shower.jpg", color: "border-violet/30" },
-  { icon: Gem, label: "Engagements", image: "/images/engagement.jpg", color: "border-amber/30" },
-  { icon: GraduationCap, label: "Graduations", image: "/images/graduation.jpg", color: "border-indigo/30" },
+const moments = [
+  { icon: Heart, label: "Weddings", stat: "200+", desc: "Dream weddings brought to life", color: "text-rose", bg: "bg-rose/10", border: "border-rose/20" },
+  { icon: Sparkles, label: "Birthdays & Milestones", stat: "500+", desc: "Celebrations that set the standard", color: "text-coral", bg: "bg-coral/10", border: "border-coral/20" },
+  { icon: Star, label: "Engagements & Showers", stat: "150+", desc: "Intimate gatherings, perfectly styled", color: "text-violet", bg: "bg-violet/10", border: "border-violet/20" },
 ];
 
-const packages = [
-  { title: "Full-Service Planning", desc: "We manage everything — concept, vendors, timeline, coordination, and full execution.", image: "/images/full-service.jpg", accent: "border-t-4 border-t-rose" },
-  { title: "Partial Planning", desc: "We step in where you need support, refine your plans, and manage final execution.", image: "/images/partial-planning.jpg", accent: "border-t-4 border-t-violet" },
-  { title: "Day-Of Coordination", desc: "We oversee vendor arrivals, manage the timeline, and ensure smooth event flow.", image: "/images/day-of.jpg", accent: "border-t-4 border-t-teal" },
+const promisePoints = [
+  { icon: Palette, title: "Your Vision, Elevated", desc: "We listen deeply, then design experiences that feel uniquely yours — never cookie-cutter, always personal.", color: "text-rose", bg: "bg-rose/10", border: "border-rose/20" },
+  { icon: Clock, title: "Stress-Free From Start to Finish", desc: "We handle the logistics, the timelines, the vendor calls — so you can be fully present in your moment.", color: "text-teal", bg: "bg-teal/10", border: "border-teal/20" },
+  { icon: Camera, title: "Every Detail, Picture-Perfect", desc: "From table settings to lighting to flow — we obsess over the details that make your photos and memories magical.", color: "text-amber", bg: "bg-amber/10", border: "border-amber/20" },
+  { icon: Heart, title: "Built on Trust & Care", desc: "98% of our clients come through referrals. We treat every celebration like it's our own family's.", color: "text-indigo", bg: "bg-indigo/10", border: "border-indigo/20" },
+];
+
+const gallery = [
+  { image: "/images/wedding.jpg", label: "Elegant Weddings" },
+  { image: "/images/birthday.jpg", label: "Vibrant Birthdays" },
+  { image: "/images/bridal-shower.jpg", label: "Bridal Showers" },
+  { image: "/images/engagement.jpg", label: "Engagement Parties" },
+  { image: "/images/graduation.jpg", label: "Graduations" },
+  { image: "/images/anniversary.jpg", label: "Anniversaries" },
 ];
 
 const SocialHome = () => {
@@ -61,63 +69,79 @@ const SocialHome = () => {
         </div>
       </section>
 
-      {/* Event Types — with thumbnails */}
+      {/* Moments We Create — stat-driven cards */}
       <section className="container mx-auto px-4 py-20">
-        <h2 className="text-3xl font-bold text-foreground text-center mb-4">Events We Plan</h2>
-        <p className="text-center text-muted-foreground font-body mb-12">Choose your celebration type</p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {eventTypes.map((t, i) => (
+        <h2 className="text-3xl font-bold text-foreground text-center mb-4">Moments We Create</h2>
+        <p className="text-center text-muted-foreground font-body mb-12 max-w-lg mx-auto">
+          Every celebration is a story. We make yours unforgettable.
+        </p>
+        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          {moments.map((m, i) => (
             <motion.div
-              key={t.label}
-              initial={{ opacity: 0, y: 15 }}
+              key={m.label}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className={`rounded-xl overflow-hidden bg-card shadow-card border ${t.color} hover:shadow-elevated transition-all cursor-pointer group`}
+              transition={{ delay: i * 0.1 }}
+              className={`p-6 rounded-2xl border ${m.border} ${m.bg} text-center transition-all hover:shadow-elevated`}
             >
-              <div className="aspect-[4/3] overflow-hidden">
-                <img src={t.image} alt={t.label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-              </div>
-              <div className="p-4 text-center">
-                <span className="text-sm font-semibold font-body text-foreground">{t.label}</span>
-              </div>
+              <m.icon className={`w-10 h-10 ${m.color} mx-auto mb-3`} />
+              <p className={`text-3xl font-bold ${m.color} mb-1`}>{m.stat}</p>
+              <h3 className="font-display text-lg font-semibold text-foreground mb-1">{m.label}</h3>
+              <p className="text-sm text-muted-foreground font-body">{m.desc}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* Planning Packages — with thumbnails */}
+      {/* Inspiration Gallery Mosaic */}
       <section className="bg-muted py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-foreground text-center mb-12">Planning Packages</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {packages.map((p, i) => (
+          <h2 className="text-3xl font-bold text-foreground text-center mb-4">Inspiration Gallery</h2>
+          <p className="text-center text-muted-foreground font-body mb-12 max-w-lg mx-auto">
+            A glimpse into the celebrations we've had the honor of bringing to life.
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-w-5xl mx-auto">
+            {gallery.map((g, i) => (
               <motion.div
-                key={p.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                key={g.label}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className={`rounded-xl bg-card border border-border shadow-card hover:shadow-elevated transition-all overflow-hidden group ${p.accent}`}
+                transition={{ delay: i * 0.06 }}
+                className="relative rounded-xl overflow-hidden group aspect-[4/3]"
               >
-                <div className="aspect-[16/9] overflow-hidden">
-                  <img src={p.image} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                </div>
-                <div className="p-6 text-center">
-                  <h3 className="font-display text-xl font-semibold text-foreground mb-3">{p.title}</h3>
-                  <p className="text-sm text-muted-foreground font-body leading-relaxed">{p.desc}</p>
+                <img src={g.image} alt={g.label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                  <span className="text-primary-foreground font-body text-sm font-semibold">{g.label}</span>
                 </div>
               </motion.div>
             ))}
           </div>
-          <div className="text-center mt-8">
-            <Link to="/social/services">
-              <Button variant="outline" className="font-body">
-                View All Services
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-            </Link>
-          </div>
+        </div>
+      </section>
+
+      {/* The Aliko Promise */}
+      <section className="container mx-auto px-4 py-20">
+        <h2 className="text-3xl font-bold text-foreground text-center mb-4">The Aliko Promise</h2>
+        <p className="text-center text-muted-foreground font-body mb-12 max-w-lg mx-auto">
+          Why families and couples trust us with their most important days.
+        </p>
+        <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          {promisePoints.map((p, i) => (
+            <motion.div
+              key={p.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className={`p-6 rounded-2xl border ${p.border} ${p.bg} transition-all hover:shadow-elevated`}
+            >
+              <p.icon className={`w-8 h-8 ${p.color} mb-4`} />
+              <h3 className="font-display text-lg font-semibold text-foreground mb-2">{p.title}</h3>
+              <p className="text-sm text-muted-foreground font-body leading-relaxed">{p.desc}</p>
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -159,12 +183,20 @@ const SocialHome = () => {
         <p className="text-muted-foreground font-body mb-8 max-w-md mx-auto">
           Beautiful moments deserve thoughtful planning. Let's create something unforgettable together.
         </p>
-        <Link to="/social/book-consultation">
-          <Button size="lg" className="font-body bg-accent text-accent-foreground hover:bg-accent/90 shadow-gold">
-            Book Consultation
-            <ArrowRight className="ml-2 w-4 h-4" />
-          </Button>
-        </Link>
+        <div className="flex flex-wrap justify-center gap-4">
+          <Link to="/social/book-consultation">
+            <Button size="lg" className="font-body bg-accent text-accent-foreground hover:bg-accent/90 shadow-gold">
+              Book Consultation
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </Button>
+          </Link>
+          <Link to="/social/services">
+            <Button size="lg" variant="outline" className="font-body">
+              View Planning Packages
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </Button>
+          </Link>
+        </div>
       </section>
 
       <Footer portal="social" />

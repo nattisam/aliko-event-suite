@@ -3,7 +3,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import {
   LayoutDashboard, Calendar, Users, Ticket, Mail, BarChart3, Settings,
-  ChevronLeft, ChevronRight, LogOut, ClipboardCheck, Heart, Menu, X
+  ChevronLeft, ChevronRight, LogOut, ClipboardCheck, Heart, Menu, X, Image
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -15,6 +15,7 @@ const navItems = [
   { label: "RSVPs", icon: Heart, href: "/admin/rsvps" },
   { label: "Check-in", icon: ClipboardCheck, href: "/admin/checkin" },
   { label: "Messaging", icon: Mail, href: "/admin/messaging" },
+  { label: "Media", icon: Image, href: "/admin/media" },
   { label: "Analytics", icon: BarChart3, href: "/admin/analytics" },
   { label: "Settings", icon: Settings, href: "/admin/settings" },
 ];

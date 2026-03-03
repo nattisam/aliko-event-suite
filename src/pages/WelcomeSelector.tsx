@@ -9,7 +9,6 @@ const VIDEOS = [
   "/videos/welcome-bg.mp4",
   "/videos/welcome-2.mp4",
   "/videos/welcome-3.mp4",
-  "/videos/welcome-4.mp4",
   "/videos/welcome-5.mp4",
 ];
 

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle } from "lucide-react";
+import { ArrowRight, TrendingUp, Shield, Globe, Zap, BarChart3, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -13,13 +13,28 @@ const stats = [
   { value: "98%", label: "Client Satisfaction" },
 ];
 
-const services = [
-  { title: "Complete Event Management", desc: "End-to-end planning and execution — concept development, budgeting, vendor coordination, production, and post-event reporting.", image: "/images/conference-hall.jpg", accent: "border-t-4 border-t-teal", badge: "bg-teal text-primary-foreground" },
-  { title: "Corporate & Institutional Events", desc: "Executive meetings, milestone celebrations, stakeholder gatherings, training programs, and award ceremonies.", image: "/images/corporate-event.jpg", accent: "border-t-4 border-t-indigo", badge: "bg-indigo text-primary-foreground" },
-  { title: "Conferences & Summits", desc: "Multi-track programs, speaker coordination, sponsorship integration, and delegate engagement strategies.", image: "/images/summit-stage.jpg", accent: "border-t-4 border-t-coral", badge: "bg-coral text-primary-foreground" },
-  { title: "Hybrid & Virtual Events", desc: "Seamless integration of in-person and digital experiences with engagement-focused design.", image: "/images/hybrid-event.jpg", accent: "border-t-4 border-t-sky", badge: "bg-sky text-primary-foreground" },
-  { title: "Product & Media Launches", desc: "Strategically produced launch experiences that elevate brand visibility and stakeholder impact.", image: "/images/media-launch.jpg", accent: "border-t-4 border-t-violet", badge: "bg-violet text-primary-foreground" },
-  { title: "VIP Protocol & Delegation Support", desc: "High-level event coordination with attention to detail, protocol, and guest experience.", image: "/images/vip-protocol.jpg", accent: "border-t-4 border-t-amber", badge: "bg-amber text-primary-foreground" },
+const pillars = [
+  { icon: Shield, title: "Precision-Driven Execution", desc: "Every timeline, vendor, and deliverable is managed with military-grade coordination — so nothing is left to chance.", color: "text-teal", bg: "bg-teal/10", border: "border-teal/20" },
+  { icon: TrendingUp, title: "Measurable Impact", desc: "We design events that move metrics — from attendee engagement scores to post-event lead conversion.", color: "text-indigo", bg: "bg-indigo/10", border: "border-indigo/20" },
+  { icon: Globe, title: "Global Reach, Local Mastery", desc: "With experience across 15+ countries, we blend international standards with deep cultural understanding.", color: "text-coral", bg: "bg-coral/10", border: "border-coral/20" },
+  { icon: Zap, title: "Technology-Forward", desc: "From hybrid streaming to real-time analytics dashboards — we leverage modern tools to amplify every experience.", color: "text-violet", bg: "bg-violet/10", border: "border-violet/20" },
+];
+
+const industries = [
+  { label: "Technology", bg: "bg-sky/10 border-sky/20 text-sky" },
+  { label: "Finance & Banking", bg: "bg-emerald/10 border-emerald/20 text-emerald" },
+  { label: "Government & Public Sector", bg: "bg-indigo/10 border-indigo/20 text-indigo" },
+  { label: "Healthcare & Pharma", bg: "bg-coral/10 border-coral/20 text-coral" },
+  { label: "Education", bg: "bg-violet/10 border-violet/20 text-violet" },
+  { label: "Energy & Infrastructure", bg: "bg-amber/10 border-amber/20 text-amber" },
+  { label: "Non-Profit & NGO", bg: "bg-teal/10 border-teal/20 text-teal" },
+  { label: "Media & Entertainment", bg: "bg-rose/10 border-rose/20 text-rose" },
+];
+
+const highlights = [
+  { stat: "4.9/5", label: "Average client rating across all events", icon: BarChart3 },
+  { stat: "72hrs", label: "Average post-event report turnaround", icon: Zap },
+  { stat: "350+", label: "Vendor partners in our curated network", icon: Users },
 ];
 
 const steps = [
@@ -91,43 +106,75 @@ const ProfessionalHome = () => {
         </div>
       </section>
 
-      {/* Services Preview — with thumbnails */}
+      {/* Why Aliko — Value Pillars */}
       <section className="container mx-auto px-4 py-20">
-        <h2 className="text-3xl font-bold text-foreground text-center mb-4">Comprehensive Event Management Services</h2>
+        <h2 className="text-3xl font-bold text-foreground text-center mb-4">Why Leading Organizations Choose Aliko</h2>
         <p className="text-center text-muted-foreground font-body mb-12 max-w-xl mx-auto">
-          Everything you need to create, manage, and grow professional events.
+          We don't just plan events — we engineer outcomes.
         </p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((s, i) => (
+        <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          {pillars.map((p, i) => (
             <motion.div
-              key={s.title}
+              key={p.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-              className={`rounded-xl bg-card border border-border shadow-card hover:shadow-elevated transition-all duration-300 overflow-hidden group ${s.accent}`}
+              transition={{ delay: i * 0.1 }}
+              className={`p-6 rounded-2xl border ${p.border} ${p.bg} transition-all hover:shadow-elevated`}
             >
-              <div className="aspect-[16/9] overflow-hidden">
-                <img src={s.image} alt={s.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-              </div>
-              <div className="p-6">
-                <h3 className="font-display text-lg font-semibold text-foreground mb-2">{s.title}</h3>
-                <p className="text-sm text-muted-foreground font-body leading-relaxed">{s.desc}</p>
-              </div>
+              <p.icon className={`w-8 h-8 ${p.color} mb-4`} />
+              <h3 className="font-display text-lg font-semibold text-foreground mb-2">{p.title}</h3>
+              <p className="text-sm text-muted-foreground font-body leading-relaxed">{p.desc}</p>
             </motion.div>
           ))}
         </div>
-        <div className="text-center mt-10">
-          <Link to="/professional/services">
-            <Button variant="outline" className="font-body">
-              View All Services
-              <ArrowRight className="ml-2 w-4 h-4" />
-            </Button>
-          </Link>
+      </section>
+
+      {/* Industries We Serve */}
+      <section className="bg-muted py-20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-foreground text-center mb-4">Industries We Serve</h2>
+          <p className="text-center text-muted-foreground font-body mb-12 max-w-lg mx-auto">
+            Deep expertise across sectors that demand excellence.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
+            {industries.map((ind, i) => (
+              <motion.span
+                key={ind.label}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className={`px-5 py-2.5 rounded-full border font-body text-sm font-semibold ${ind.bg}`}
+              >
+                {ind.label}
+              </motion.span>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* How We Work — colorful backgrounds */}
+      {/* Performance Highlights */}
+      <section className="container mx-auto px-4 py-20">
+        <div className="grid md:grid-cols-3 gap-6">
+          {highlights.map((h, i) => (
+            <motion.div
+              key={h.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="text-center p-8 rounded-2xl bg-card border border-border shadow-card"
+            >
+              <h.icon className="w-8 h-8 text-accent mx-auto mb-3" />
+              <p className="text-3xl font-bold text-foreground mb-1">{h.stat}</p>
+              <p className="text-sm text-muted-foreground font-body">{h.label}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* How We Work */}
       <section className="bg-muted py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-foreground text-center mb-12">How We Work</h2>
@@ -187,12 +234,20 @@ const ProfessionalHome = () => {
         <p className="text-muted-foreground font-body mb-8 max-w-md mx-auto">
           Join thousands of organizers creating impactful professional events with Aliko.
         </p>
-        <Link to="/professional/request-proposal">
-          <Button size="lg" className="font-body bg-primary text-primary-foreground hover:bg-primary/90">
-            Request Proposal
-            <ArrowRight className="ml-2 w-4 h-4" />
-          </Button>
-        </Link>
+        <div className="flex flex-wrap justify-center gap-4">
+          <Link to="/professional/request-proposal">
+            <Button size="lg" className="font-body bg-primary text-primary-foreground hover:bg-primary/90">
+              Request Proposal
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </Button>
+          </Link>
+          <Link to="/professional/services">
+            <Button size="lg" variant="outline" className="font-body">
+              View All Services
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </Button>
+          </Link>
+        </div>
       </section>
 
       <Footer portal="professional" />

@@ -1,9 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Briefcase, Heart, ArrowRight } from "lucide-react";
 import logoProfessional from "@/assets/logo-professional.png";
 import logoSocial from "@/assets/logo-social.png";
+
+const VIDEOS = [
+  "/videos/welcome-bg.mp4",
+  "/videos/welcome-2.mp4",
+  "/videos/welcome-3.mp4",
+  "/videos/welcome-4.mp4",
+  "/videos/welcome-5.mp4",
+];
+
+const ROTATE_INTERVAL = 5000;
 
 const glowWords = [
   { text: "Connect", delay: 1.0 },
@@ -16,10 +26,37 @@ const glowWords = [
 const WelcomeSelector = () => {
   const navigate = useNavigate();
   const [lastVisit, setLastVisit] = useState<string | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   useEffect(() => {
     const saved = localStorage.getItem("aliko-last-portal");
     if (saved) setLastVisit(saved);
+  }, []);
+
+  // Rotate videos
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % VIDEOS.length);
+    }, ROTATE_INTERVAL);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Play active video, pause others
+  useEffect(() => {
+    videoRefs.current.forEach((v, i) => {
+      if (!v) return;
+      if (i === activeIndex) {
+        v.currentTime = 0;
+        v.play().catch(() => {});
+      } else {
+        v.pause();
+      }
+    });
+  }, [activeIndex]);
+
+  const setVideoRef = useCallback((el: HTMLVideoElement | null, i: number) => {
+    videoRefs.current[i] = el;
   }, []);
 
   const handleSelect = (portal: "professional" | "social") => {
@@ -28,19 +65,26 @@ const WelcomeSelector = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[hsl(152,50%,4%)]">
-      {/* Video Background — dark & subtle */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-30"
-      >
-        <source src="/videos/welcome-bg.mp4" type="video/mp4" />
-      </video>
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(152,50%,4%)/0.6] via-[hsl(152,50%,4%)/0.8] to-[hsl(152,50%,4%)]" />
+    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[hsl(152,50%,3%)]">
+      {/* Video layers */}
+      {VIDEOS.map((src, i) => (
+        <video
+          key={src}
+          ref={(el) => setVideoRef(el, i)}
+          muted
+          loop
+          playsInline
+          preload={i === 0 ? "auto" : "metadata"}
+          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
+          style={{ opacity: i === activeIndex ? 0.2 : 0 }}
+        >
+          <source src={src} type="video/mp4" />
+        </video>
+      ))}
+
+      {/* Heavy dark overlay for card readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(152,50%,3%)]/50 via-[hsl(152,50%,3%)]/75 to-[hsl(152,50%,3%)]/95" />
+      <div className="absolute inset-0 bg-[hsl(152,50%,3%)]/40" />
 
       {/* Continue banner */}
       {lastVisit && (
@@ -49,9 +93,7 @@ const WelcomeSelector = () => {
           animate={{ y: 0, opacity: 1 }}
           className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center gap-3 py-3 px-4 bg-accent/90 backdrop-blur-sm"
         >
-          <span className="text-sm font-medium text-accent-foreground">
-            Welcome back!
-          </span>
+          <span className="text-sm font-medium text-accent-foreground">Welcome back!</span>
           <button
             onClick={() => handleSelect(lastVisit as "professional" | "social")}
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent-foreground underline underline-offset-2 hover:opacity-80 transition-opacity"
@@ -73,7 +115,7 @@ const WelcomeSelector = () => {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 tracking-tight">
             Welcome to Aliko Events
           </h1>
-          <p className="text-lg sm:text-xl text-primary-foreground/50 font-body font-light tracking-wide">
+          <p className="text-lg sm:text-xl text-primary-foreground/40 font-body font-light tracking-wide">
             Professional precision or personal celebration — choose your experience.
           </p>
         </motion.div>
@@ -87,19 +129,15 @@ const WelcomeSelector = () => {
             whileHover={{ y: -6, scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleSelect("professional")}
-            className="group relative overflow-hidden rounded-2xl border border-primary-foreground/10 hover:border-teal/40 bg-[hsl(152,30%,8%)/0.6] backdrop-blur-md transition-all duration-300 cursor-pointer flex flex-col text-left"
+            className="group relative overflow-hidden rounded-2xl border border-primary-foreground/8 hover:border-teal/30 bg-[hsl(152,30%,6%)]/80 backdrop-blur-xl transition-all duration-300 cursor-pointer flex flex-col text-left shadow-[0_0_60px_-15px_hsla(152,45%,18%,0.15)]"
           >
             <div className="flex-1 flex items-center justify-center p-8 min-h-[220px]">
               <img src={logoProfessional} alt="Aliko Events Professional" className="max-h-40 w-auto object-contain" />
             </div>
-            <div className="border-t border-primary-foreground/5 bg-[hsl(152,30%,6%)/0.8]">
-              <div className="relative z-10 p-6 lg:p-8">
-                <h2 className="text-2xl font-bold text-primary-foreground mb-1">
-                  Aliko Events Professional
-                </h2>
-                <p className="text-sm text-primary-foreground/40 font-body mb-5">
-                  Strategic events. Flawless execution. Measurable impact.
-                </p>
+            <div className="border-t border-primary-foreground/5 bg-[hsl(152,30%,4%)]/90">
+              <div className="p-6 lg:p-8">
+                <h2 className="text-2xl font-bold text-primary-foreground mb-1">Aliko Events Professional</h2>
+                <p className="text-sm text-primary-foreground/35 font-body mb-5">Strategic events. Flawless execution. Measurable impact.</p>
                 <ul className="space-y-2 mb-6 font-body">
                   {[
                     { text: "Conferences & Summits", color: "text-teal" },
@@ -107,7 +145,7 @@ const WelcomeSelector = () => {
                     { text: "Hybrid & Virtual Programs", color: "text-sky" },
                     { text: "Exchange & Delegation Events", color: "text-violet" },
                   ].map((item) => (
-                    <li key={item.text} className="flex items-center gap-3 text-primary-foreground/60">
+                    <li key={item.text} className="flex items-center gap-3 text-primary-foreground/55">
                       <Briefcase className={`w-4 h-4 ${item.color} flex-shrink-0`} />
                       <span className="text-sm">{item.text}</span>
                     </li>
@@ -129,19 +167,15 @@ const WelcomeSelector = () => {
             whileHover={{ y: -6, scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleSelect("social")}
-            className="group relative overflow-hidden rounded-2xl border border-primary-foreground/10 hover:border-rose/40 bg-[hsl(152,30%,8%)/0.6] backdrop-blur-md transition-all duration-300 cursor-pointer flex flex-col text-left"
+            className="group relative overflow-hidden rounded-2xl border border-primary-foreground/8 hover:border-rose/30 bg-[hsl(152,30%,6%)]/80 backdrop-blur-xl transition-all duration-300 cursor-pointer flex flex-col text-left shadow-[0_0_60px_-15px_hsla(340,65%,55%,0.1)]"
           >
             <div className="flex-1 flex items-center justify-center p-8 min-h-[220px]">
               <img src={logoSocial} alt="Aliko Events Social" className="max-h-40 w-auto object-contain" />
             </div>
-            <div className="border-t border-primary-foreground/5 bg-[hsl(152,30%,6%)/0.8]">
-              <div className="relative z-10 p-6 lg:p-8">
-                <h2 className="text-2xl font-bold text-primary-foreground mb-1">
-                  Aliko Events Social
-                </h2>
-                <p className="text-sm text-primary-foreground/40 font-body mb-5">
-                  Beautiful celebrations, thoughtfully planned.
-                </p>
+            <div className="border-t border-primary-foreground/5 bg-[hsl(152,30%,4%)]/90">
+              <div className="p-6 lg:p-8">
+                <h2 className="text-2xl font-bold text-primary-foreground mb-1">Aliko Events Social</h2>
+                <p className="text-sm text-primary-foreground/35 font-body mb-5">Beautiful celebrations, thoughtfully planned.</p>
                 <ul className="space-y-2 mb-6 font-body">
                   {[
                     { text: "Weddings", color: "text-rose" },
@@ -149,7 +183,7 @@ const WelcomeSelector = () => {
                     { text: "Bridal Showers", color: "text-violet" },
                     { text: "Graduations & Engagements", color: "text-amber" },
                   ].map((item) => (
-                    <li key={item.text} className="flex items-center gap-3 text-primary-foreground/60">
+                    <li key={item.text} className="flex items-center gap-3 text-primary-foreground/55">
                       <Heart className={`w-4 h-4 ${item.color} flex-shrink-0`} />
                       <span className="text-sm">{item.text}</span>
                     </li>
@@ -165,29 +199,40 @@ const WelcomeSelector = () => {
         </div>
 
         {/* Glowing bulb tagline */}
-        <div className="flex items-center justify-center gap-3 mt-14">
+        <div className="flex items-center justify-center gap-4 mt-16">
           {glowWords.map((w, i) => (
             <motion.span
               key={i}
-              initial={{ opacity: 0, scale: 0.6, filter: "blur(8px)" }}
+              initial={{ opacity: 0, scale: 0.5, filter: "blur(12px)" }}
               animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              transition={{ delay: w.delay, duration: 0.6, ease: "easeOut" }}
-              className={`font-body tracking-widest uppercase ${
+              transition={{ delay: w.delay, duration: 0.7, ease: "easeOut" }}
+              className={
                 w.text === "•"
-                  ? "text-accent/60 text-xs"
-                  : "text-sm text-primary-foreground/70"
-              }`}
-              style={
-                w.text !== "•"
-                  ? {
-                      textShadow:
-                        "0 0 8px hsla(42,65%,50%,0.4), 0 0 20px hsla(42,65%,50%,0.2), 0 0 40px hsla(42,65%,50%,0.1)",
-                    }
-                  : undefined
+                  ? "text-accent text-xl font-bold"
+                  : "text-lg sm:text-xl font-bold font-body tracking-[0.25em] uppercase text-accent"
               }
+              style={{
+                textShadow:
+                  w.text === "•"
+                    ? "0 0 10px hsla(42,65%,50%,0.8)"
+                    : "0 0 10px hsla(42,65%,50%,0.9), 0 0 30px hsla(42,65%,50%,0.5), 0 0 60px hsla(42,65%,50%,0.3), 0 0 100px hsla(42,65%,50%,0.15)",
+              }}
             >
               {w.text}
             </motion.span>
+          ))}
+        </div>
+
+        {/* Video indicator dots */}
+        <div className="flex items-center justify-center gap-2 mt-8">
+          {VIDEOS.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveIndex(i)}
+              className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${
+                i === activeIndex ? "bg-accent w-4" : "bg-primary-foreground/20 hover:bg-primary-foreground/40"
+              }`}
+            />
           ))}
         </div>
       </div>

@@ -6,11 +6,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const whyChoose = [
-  { text: "Detail-driven project management", color: "text-teal bg-teal/10" },
-  { text: "Transparent budgeting and accountability", color: "text-indigo bg-indigo/10" },
-  { text: "Technology-enabled registration and reporting", color: "text-coral bg-coral/10" },
-  { text: "Experienced production team", color: "text-violet bg-violet/10" },
-  { text: "Multicultural and international experience", color: "text-emerald bg-emerald/10" },
+  { text: "Detail-driven project management", desc: "Every element tracked, every deadline met — precision planning from start to finish.", icon: ClipboardList, gradient: "from-teal/80 to-teal/40", border: "border-teal" },
+  { text: "Transparent budgeting and accountability", desc: "Clear cost breakdowns, real-time tracking, and no surprises at the finish line.", icon: BarChart3, gradient: "from-indigo/80 to-indigo/40", border: "border-indigo" },
+  { text: "Technology-enabled registration and reporting", desc: "Digital check-in, live dashboards, and post-event analytics at your fingertips.", icon: Globe, gradient: "from-coral/80 to-coral/40", border: "border-coral" },
+  { text: "Experienced production team", desc: "Seasoned professionals who've delivered hundreds of high-profile events.", icon: Award, gradient: "from-violet/80 to-violet/40", border: "border-violet" },
+  { text: "Multicultural and international experience", desc: "Fluent across cultures, protocols, and global event standards.", icon: Users, gradient: "from-emerald/80 to-emerald/40", border: "border-emerald" },
 ];
 
 const coreServices = [
@@ -52,25 +52,25 @@ const ProfessionalServices = () => {
       {/* Why Choose */}
       <section className="container mx-auto px-4 py-20">
         <h2 className="text-3xl font-bold text-foreground text-center mb-12">Why Choose Aliko Events</h2>
-        <div className="max-w-2xl mx-auto space-y-4">
-          {whyChoose.map((item, i) => {
-            const [textColor, bgColor] = item.color.split(" ");
-            return (
-              <motion.div
-                key={item.text}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="flex items-center gap-4 p-4 rounded-lg bg-card border border-border"
-              >
-                <div className={`w-8 h-8 rounded-full ${bgColor} flex items-center justify-center flex-shrink-0`}>
-                  <CheckCircle className={`w-4 h-4 ${textColor}`} />
-                </div>
-                <span className="font-body text-foreground">{item.text}</span>
-              </motion.div>
-            );
-          })}
+        <div className="max-w-4xl mx-auto space-y-5">
+          {whyChoose.map((item, i) => (
+            <motion.div
+              key={item.text}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className={`flex items-center gap-6 p-6 rounded-2xl bg-gradient-to-r ${item.gradient} border-l-4 ${item.border} shadow-card hover:shadow-elevated transition-all duration-300`}
+            >
+              <div className="w-14 h-14 rounded-xl bg-background/90 flex items-center justify-center flex-shrink-0 shadow-sm">
+                <item.icon className="w-7 h-7 text-foreground" />
+              </div>
+              <div>
+                <h3 className="font-display text-lg font-semibold text-foreground">{item.text}</h3>
+                <p className="text-sm text-foreground/80 font-body mt-1">{item.desc}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 

@@ -87,10 +87,10 @@ const ProfessionalServices = () => {
             {[...whyChoose, ...whyChoose].map((item, i) => (
               <div
                 key={`${item.text}-${i}`}
-                className={`flex-shrink-0 rounded-2xl p-7 border ${item.bg} border-border/40 shadow-card hover:shadow-elevated transition-all duration-300`}
-                style={{ width: `calc(${100 / visible}% - ${((visible - 1) * 20) / visible}px)` }}
+                className="flex-shrink-0 rounded-2xl p-7 border border-border/40 shadow-card hover:shadow-elevated transition-all duration-300"
+                style={{ width: `calc(${100 / visible}% - ${((visible - 1) * 20) / visible}px)`, backgroundColor: item.cardBg }}
               >
-                <div className={`w-12 h-12 rounded-xl ${item.bg} flex items-center justify-center mb-5`}>
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style={{ backgroundColor: item.cardBg }}>
                   <item.icon className={`w-6 h-6 ${item.iconColor}`} />
                 </div>
                 <h3 className="font-display text-lg font-bold text-foreground mb-2">{item.text}</h3>
@@ -131,7 +131,7 @@ const ProfessionalServices = () => {
                   </div>
                   <div className="p-6">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className={`w-9 h-9 rounded-lg ${s.bg} flex items-center justify-center`}>
+                      <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ backgroundColor: s.cardBg }}>
                         <s.icon className={`w-4 h-4 ${s.iconColor}`} />
                       </div>
                       <h3 className="font-display text-base font-semibold text-foreground">{s.title}</h3>
@@ -169,7 +169,8 @@ const ProfessionalServices = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className={`p-5 rounded-2xl border ${item.border} ${item.bg} text-left shadow-card hover:shadow-elevated transition-all`}
+              className="p-5 rounded-2xl border border-border/30 text-left shadow-card hover:shadow-elevated transition-all"
+              style={{ backgroundColor: item.cardBg }}
             >
               <span className="text-sm font-semibold font-body text-foreground">{item.text}</span>
             </motion.div>

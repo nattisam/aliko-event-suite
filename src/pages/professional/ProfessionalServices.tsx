@@ -7,32 +7,32 @@ import Footer from "@/components/Footer";
 import { useEffect, useRef, useState } from "react";
 
 const whyChoose = [
-  { text: "Precision-Driven Execution", desc: "Every timeline, vendor, and deliverable is managed with military-grade coordination — so nothing is left to chance.", icon: Shield, bg: "bg-teal/8", iconColor: "text-teal" },
-  { text: "Measurable Impact", desc: "We design events that move metrics — from attendee engagement scores to post-event lead conversion.", icon: TrendingUp, bg: "bg-violet/8", iconColor: "text-violet" },
-  { text: "Global Reach, Local Mastery", desc: "With experience across 15+ countries, we blend international standards with deep cultural understanding.", icon: Globe, bg: "bg-coral/8", iconColor: "text-coral" },
-  { text: "Technology-Forward", desc: "From hybrid streaming to real-time analytics dashboards — we leverage modern tools to amplify every experience.", icon: Zap, bg: "bg-violet/8", iconColor: "text-violet" },
-  { text: "Transparent Budgeting", desc: "Clear cost breakdowns, real-time tracking, and no surprises at the finish line.", icon: BarChart3, bg: "bg-teal/8", iconColor: "text-teal" },
-  { text: "Experienced Production Team", desc: "Seasoned professionals who've delivered hundreds of high-profile events across every format.", icon: Award, bg: "bg-coral/8", iconColor: "text-coral" },
+  { text: "Precision-Driven Execution", desc: "Every timeline, vendor, and deliverable is managed with military-grade coordination — so nothing is left to chance.", icon: Shield, cardBg: "hsla(174, 60%, 41%, 0.08)", iconColor: "text-teal" },
+  { text: "Measurable Impact", desc: "We design events that move metrics — from attendee engagement scores to post-event lead conversion.", icon: TrendingUp, cardBg: "hsla(262, 52%, 56%, 0.10)", iconColor: "text-violet" },
+  { text: "Global Reach, Local Mastery", desc: "With experience across 15+ countries, we blend international standards with deep cultural understanding.", icon: Globe, cardBg: "hsla(12, 76%, 61%, 0.08)", iconColor: "text-coral" },
+  { text: "Technology-Forward", desc: "From hybrid streaming to real-time analytics dashboards — we leverage modern tools to amplify every experience.", icon: Zap, cardBg: "hsla(262, 52%, 56%, 0.10)", iconColor: "text-violet" },
+  { text: "Transparent Budgeting", desc: "Clear cost breakdowns, real-time tracking, and no surprises at the finish line.", icon: BarChart3, cardBg: "hsla(174, 60%, 41%, 0.08)", iconColor: "text-teal" },
+  { text: "Experienced Production Team", desc: "Seasoned professionals who've delivered hundreds of high-profile events across every format.", icon: Award, cardBg: "hsla(12, 76%, 61%, 0.08)", iconColor: "text-coral" },
 ];
 
 const coreServices = [
-  { icon: ClipboardList, title: "Complete Event Management", desc: "We manage every aspect of your event — from concept development and vendor sourcing to onsite execution and final reporting.", image: "/images/conference-hall.jpg", bg: "bg-teal/8", iconColor: "text-teal" },
-  { icon: Award, title: "Corporate & Government Events", desc: "We design professional events aligned with institutional standards, stakeholder expectations, and policy requirements.", image: "/images/corporate-event.jpg", bg: "bg-violet/8", iconColor: "text-violet" },
-  { icon: Globe, title: "Hybrid & Virtual Event Production", desc: "We combine production quality, digital engagement tools, and audience interaction to create dynamic hybrid experiences.", image: "/images/hybrid-event.jpg", bg: "bg-coral/8", iconColor: "text-coral" },
-  { icon: Mic, title: "Launch & Media Events", desc: "We deliver launch events designed to amplify brand presence and engage press, partners, and clients.", image: "/images/media-launch.jpg", bg: "bg-teal/8", iconColor: "text-teal" },
-  { icon: Users, title: "Conferences & Multi-Day Programs", desc: "We manage multi-session, multi-speaker, multi-day conferences with precision and structure.", image: "/images/summit-stage.jpg", bg: "bg-violet/8", iconColor: "text-violet" },
-  { icon: BarChart3, title: "Ceremonies & Official Inaugurations", desc: "Protocol-conscious events with structured sequencing and seamless coordination.", image: "/images/vip-protocol.jpg", bg: "bg-coral/8", iconColor: "text-coral" },
+  { icon: ClipboardList, title: "Complete Event Management", desc: "We manage every aspect of your event — from concept development and vendor sourcing to onsite execution and final reporting.", image: "/images/conference-hall.jpg", cardBg: "hsla(174, 60%, 41%, 0.08)", iconColor: "text-teal" },
+  { icon: Award, title: "Corporate & Government Events", desc: "We design professional events aligned with institutional standards, stakeholder expectations, and policy requirements.", image: "/images/corporate-event.jpg", cardBg: "hsla(262, 52%, 56%, 0.10)", iconColor: "text-violet" },
+  { icon: Globe, title: "Hybrid & Virtual Event Production", desc: "We combine production quality, digital engagement tools, and audience interaction to create dynamic hybrid experiences.", image: "/images/hybrid-event.jpg", cardBg: "hsla(12, 76%, 61%, 0.08)", iconColor: "text-coral" },
+  { icon: Mic, title: "Launch & Media Events", desc: "We deliver launch events designed to amplify brand presence and engage press, partners, and clients.", image: "/images/media-launch.jpg", cardBg: "hsla(174, 60%, 41%, 0.08)", iconColor: "text-teal" },
+  { icon: Users, title: "Conferences & Multi-Day Programs", desc: "We manage multi-session, multi-speaker, multi-day conferences with precision and structure.", image: "/images/summit-stage.jpg", cardBg: "hsla(262, 52%, 56%, 0.10)", iconColor: "text-violet" },
+  { icon: BarChart3, title: "Ceremonies & Official Inaugurations", desc: "Protocol-conscious events with structured sequencing and seamless coordination.", image: "/images/vip-protocol.jpg", cardBg: "hsla(12, 76%, 61%, 0.08)", iconColor: "text-coral" },
 ];
 
 const coverageGrid = [
-  { text: "Event Strategy & Concept", bg: "bg-teal/8", border: "border-teal/20" },
-  { text: "Budget Development & Procurement", bg: "bg-violet/8", border: "border-violet/20" },
-  { text: "Registration & Ticketing", bg: "bg-coral/8", border: "border-coral/20" },
-  { text: "Agenda & Speaker Management", bg: "bg-teal/8", border: "border-teal/20" },
-  { text: "Vendor & Venue Coordination", bg: "bg-violet/8", border: "border-violet/20" },
-  { text: "VIP & Protocol Support", bg: "bg-coral/8", border: "border-coral/20" },
-  { text: "Onsite Operations & Staffing", bg: "bg-teal/8", border: "border-teal/20" },
-  { text: "Post-Event Reporting & Analytics", bg: "bg-violet/8", border: "border-violet/20" },
+  { text: "Event Strategy & Concept", cardBg: "hsla(174, 60%, 41%, 0.08)" },
+  { text: "Budget Development & Procurement", cardBg: "hsla(262, 52%, 56%, 0.10)" },
+  { text: "Registration & Ticketing", cardBg: "hsla(12, 76%, 61%, 0.08)" },
+  { text: "Agenda & Speaker Management", cardBg: "hsla(174, 60%, 41%, 0.08)" },
+  { text: "Vendor & Venue Coordination", cardBg: "hsla(262, 52%, 56%, 0.10)" },
+  { text: "VIP & Protocol Support", cardBg: "hsla(12, 76%, 61%, 0.08)" },
+  { text: "Onsite Operations & Staffing", cardBg: "hsla(174, 60%, 41%, 0.08)" },
+  { text: "Post-Event Reporting & Analytics", cardBg: "hsla(262, 52%, 56%, 0.10)" },
 ];
 
 /* Auto-sliding carousel hook */
@@ -87,10 +87,10 @@ const ProfessionalServices = () => {
             {[...whyChoose, ...whyChoose].map((item, i) => (
               <div
                 key={`${item.text}-${i}`}
-                className={`flex-shrink-0 rounded-2xl p-7 border ${item.bg} border-border/40 shadow-card hover:shadow-elevated transition-all duration-300`}
-                style={{ width: `calc(${100 / visible}% - ${((visible - 1) * 20) / visible}px)` }}
+                className="flex-shrink-0 rounded-2xl p-7 border border-border/40 shadow-card hover:shadow-elevated transition-all duration-300"
+                style={{ width: `calc(${100 / visible}% - ${((visible - 1) * 20) / visible}px)`, backgroundColor: item.cardBg }}
               >
-                <div className={`w-12 h-12 rounded-xl ${item.bg} flex items-center justify-center mb-5`}>
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style={{ backgroundColor: item.cardBg }}>
                   <item.icon className={`w-6 h-6 ${item.iconColor}`} />
                 </div>
                 <h3 className="font-display text-lg font-bold text-foreground mb-2">{item.text}</h3>
@@ -131,7 +131,7 @@ const ProfessionalServices = () => {
                   </div>
                   <div className="p-6">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className={`w-9 h-9 rounded-lg ${s.bg} flex items-center justify-center`}>
+                      <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ backgroundColor: s.cardBg }}>
                         <s.icon className={`w-4 h-4 ${s.iconColor}`} />
                       </div>
                       <h3 className="font-display text-base font-semibold text-foreground">{s.title}</h3>
@@ -169,7 +169,8 @@ const ProfessionalServices = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className={`p-5 rounded-2xl border ${item.border} ${item.bg} text-left shadow-card hover:shadow-elevated transition-all`}
+              className="p-5 rounded-2xl border border-border/30 text-left shadow-card hover:shadow-elevated transition-all"
+              style={{ backgroundColor: item.cardBg }}
             >
               <span className="text-sm font-semibold font-body text-foreground">{item.text}</span>
             </motion.div>

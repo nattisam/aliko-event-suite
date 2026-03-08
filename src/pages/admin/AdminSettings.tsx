@@ -24,55 +24,43 @@ const AdminSettings = () => {
   };
 
   return (
-    <div className="space-y-8">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-        <h1 className="text-2xl font-bold font-display text-foreground mb-2">Settings</h1>
-        <p className="text-sm text-muted-foreground font-body">Manage your profile and preferences.</p>
+    <div className="space-y-6">
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
+        <h1 className="text-2xl font-bold font-display text-foreground">Settings</h1>
+        <p className="text-sm text-muted-foreground font-body mt-1">Manage your profile and preferences</p>
       </motion.div>
 
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-        {/* Profile avatar header */}
-        <div className="relative overflow-hidden rounded-2xl gradient-hero p-8 mb-6">
-          <div className="absolute top-0 right-0 w-40 h-40 bg-accent/10 rounded-full blur-3xl" />
-          <div className="relative z-10 flex items-center gap-4">
-            <div className="w-16 h-16 rounded-2xl bg-primary-foreground/20 backdrop-blur-sm flex items-center justify-center text-2xl font-bold text-primary-foreground font-display">
-              {(profile?.full_name || profile?.email || "U").charAt(0).toUpperCase()}
-            </div>
-            <div>
-              <h2 className="text-xl font-bold font-display text-primary-foreground">{profile?.full_name || "Your Name"}</h2>
-              <p className="text-sm text-primary-foreground/70 font-body">{profile?.email}</p>
-            </div>
+      {/* Profile header */}
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-green-light p-8">
+        <div className="absolute top-0 right-0 w-40 h-40 bg-accent/10 rounded-full blur-3xl" />
+        <div className="relative z-10 flex items-center gap-4">
+          <div className="w-16 h-16 rounded-2xl bg-primary-foreground/15 backdrop-blur-sm flex items-center justify-center text-2xl font-bold text-primary-foreground font-display shadow-lg">
+            {(profile?.full_name || profile?.email || "U").charAt(0).toUpperCase()}
+          </div>
+          <div>
+            <h2 className="text-xl font-bold font-display text-primary-foreground">{profile?.full_name || "Your Name"}</h2>
+            <p className="text-sm text-primary-foreground/70 font-body">{profile?.email}</p>
           </div>
         </div>
+      </motion.div>
 
-        {/* Form */}
-        <div className="bg-card border border-border/50 rounded-2xl p-6 max-w-lg space-y-5 shadow-card">
-          <div>
-            <Label className="font-body text-sm flex items-center gap-2 mb-2">
-              <User className="w-3.5 h-3.5 text-muted-foreground" />
-              Full Name
-            </Label>
-            <Input value={fullName} onChange={(e) => setFullName(e.target.value)} className="rounded-xl" />
-          </div>
-          <div>
-            <Label className="font-body text-sm flex items-center gap-2 mb-2">
-              <Mail className="w-3.5 h-3.5 text-muted-foreground" />
-              Email
-            </Label>
-            <Input value={profile?.email ?? ""} disabled className="rounded-xl bg-muted" />
-          </div>
-          <div>
-            <Label className="font-body text-sm flex items-center gap-2 mb-2">
-              <Phone className="w-3.5 h-3.5 text-muted-foreground" />
-              Phone
-            </Label>
-            <Input value={phone} onChange={(e) => setPhone(e.target.value)} className="rounded-xl" />
-          </div>
-          <Button onClick={handleSave} disabled={loading} className="font-body rounded-xl gap-2">
-            <Save className="w-4 h-4" />
-            {loading ? "Saving..." : "Save Changes"}
-          </Button>
+      {/* Form */}
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-card border border-border/60 rounded-2xl p-6 max-w-lg space-y-5">
+        <div>
+          <Label className="font-body text-xs flex items-center gap-2 mb-2"><User className="w-3.5 h-3.5 text-muted-foreground" />Full Name</Label>
+          <Input value={fullName} onChange={(e) => setFullName(e.target.value)} className="rounded-xl" />
         </div>
+        <div>
+          <Label className="font-body text-xs flex items-center gap-2 mb-2"><Mail className="w-3.5 h-3.5 text-muted-foreground" />Email</Label>
+          <Input value={profile?.email ?? ""} disabled className="rounded-xl bg-muted/50" />
+        </div>
+        <div>
+          <Label className="font-body text-xs flex items-center gap-2 mb-2"><Phone className="w-3.5 h-3.5 text-muted-foreground" />Phone</Label>
+          <Input value={phone} onChange={(e) => setPhone(e.target.value)} className="rounded-xl" />
+        </div>
+        <Button onClick={handleSave} disabled={loading} className="font-body rounded-xl gap-2 shadow-md">
+          <Save className="w-4 h-4" />{loading ? "Saving..." : "Save Changes"}
+        </Button>
       </motion.div>
     </div>
   );

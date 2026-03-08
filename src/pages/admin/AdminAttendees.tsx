@@ -1,9 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { Users, CheckCircle, XCircle, Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 const AdminAttendees = () => {
   const { user } = useAuth();
+  const [search, setSearch] = useState("");
 
   const { data: registrations, isLoading } = useQuery({
     queryKey: ["admin-attendees"],
@@ -17,45 +22,61 @@ const AdminAttendees = () => {
     enabled: !!user,
   });
 
+  const filtered = registrations?.filter((r) =>
+    r.attendee_name.toLowerCase().includes(search.toLowerCase()) ||
+    r.attendee_email.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
-    <div>
-      <h1 className="text-2xl font-bold font-display text-foreground mb-6">Attendees</h1>
+    <div className="space-y-6">
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
+        <h1 className="text-2xl font-bold font-display text-foreground">Attendees</h1>
+        <p className="text-sm text-muted-foreground font-body mt-1">View all registrations across your events</p>
+      </motion.div>
+
+      {/* Search */}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="relative max-w-md">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+        <Input placeholder="Search attendees..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9 rounded-xl" />
+      </motion.div>
+
       {isLoading ? (
-        <p className="text-muted-foreground font-body">Loading...</p>
-      ) : !registrations?.length ? (
-        <p className="text-muted-foreground font-body">No registrations yet.</p>
+        <div className="text-center py-16 text-muted-foreground font-body">Loading...</div>
+      ) : !filtered?.length ? (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-16">
+          <Users className="w-12 h-12 mx-auto text-muted-foreground/40 mb-3" />
+          <p className="text-muted-foreground font-body">{search ? "No results found." : "No registrations yet."}</p>
+        </motion.div>
       ) : (
-        <div className="bg-card border border-border rounded-xl overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead className="bg-muted">
-              <tr>
-                <th className="text-left p-3 font-body font-semibold">Name</th>
-                <th className="text-left p-3 font-body font-semibold">Email</th>
-                <th className="text-left p-3 font-body font-semibold hidden md:table-cell">Event</th>
-                <th className="text-left p-3 font-body font-semibold hidden sm:table-cell">Payment</th>
-                <th className="text-left p-3 font-body font-semibold">Check-in</th>
-              </tr>
-            </thead>
-            <tbody>
-              {registrations.map((r) => (
-                <tr key={r.id} className="border-t border-border">
-                  <td className="p-3 font-body">{r.attendee_name}</td>
-                  <td className="p-3 font-body text-muted-foreground">{r.attendee_email}</td>
-                  <td className="p-3 font-body hidden md:table-cell">{r.event_title}</td>
-                  <td className="p-3 font-body hidden sm:table-cell">
-                    <span className={`px-2 py-0.5 rounded-full text-xs ${r.payment_status === "paid" ? "bg-green-100 text-green-800" : "bg-yellow-100 text-yellow-800"}`}>
-                      {r.payment_status}
-                    </span>
-                  </td>
-                  <td className="p-3 font-body">
-                    <span className={`px-2 py-0.5 rounded-full text-xs ${r.checkin_status === "checked_in" ? "bg-green-100 text-green-800" : "bg-muted text-muted-foreground"}`}>
-                      {r.checkin_status === "checked_in" ? "✓" : "—"}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="grid gap-3">
+          {filtered.map((r, i) => (
+            <motion.div
+              key={r.id}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.03 }}
+              className="bg-card border border-border/60 rounded-2xl p-4 flex items-center gap-4 hover:shadow-card transition-all"
+            >
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet to-indigo flex items-center justify-center text-sm font-bold text-primary-foreground flex-shrink-0 shadow-sm">
+                {r.attendee_name.charAt(0).toUpperCase()}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-body font-semibold text-foreground text-sm truncate">{r.attendee_name}</p>
+                <p className="text-xs text-muted-foreground font-body truncate">{r.attendee_email}</p>
+              </div>
+              <div className="hidden md:block text-xs text-muted-foreground font-body truncate max-w-[150px]">{r.event_title}</div>
+              <span className={`px-2.5 py-1 rounded-full text-[11px] font-body font-medium hidden sm:block ${
+                r.payment_status === "paid" ? "bg-emerald/15 text-emerald" : "bg-secondary/15 text-secondary"
+              }`}>{r.payment_status}</span>
+              <span className="flex items-center gap-1 text-xs font-body">
+                {r.checkin_status === "checked_in" ? (
+                  <><CheckCircle className="w-3.5 h-3.5 text-emerald" /><span className="text-emerald hidden sm:inline">In</span></>
+                ) : (
+                  <><XCircle className="w-3.5 h-3.5 text-muted-foreground/50" /><span className="text-muted-foreground hidden sm:inline">No</span></>
+                )}
+              </span>
+            </motion.div>
+          ))}
         </div>
       )}
     </div>

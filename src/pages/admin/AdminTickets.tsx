@@ -7,8 +7,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus, Trash2, Ticket, DollarSign, Hash } from "lucide-react";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
 
 const AdminTickets = () => {
   const { user } = useAuth();
@@ -69,79 +70,68 @@ const AdminTickets = () => {
   });
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold font-display text-foreground">Tickets</h1>
+    <div className="space-y-6">
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold font-display text-foreground">Tickets</h1>
+          <p className="text-sm text-muted-foreground font-body mt-1">Manage ticket tiers for professional events</p>
+        </div>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button className="font-body"><Plus className="w-4 h-4 mr-2" />Add Ticket Tier</Button>
+            <Button className="font-body rounded-xl gap-2 shadow-md"><Plus className="w-4 h-4" />Add Tier</Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="rounded-2xl">
             <DialogHeader><DialogTitle className="font-display">New Ticket Tier</DialogTitle></DialogHeader>
             <div className="space-y-4">
               <div>
-                <Label className="font-body">Event</Label>
+                <Label className="font-body text-xs">Event</Label>
                 <Select value={selectedEvent} onValueChange={setSelectedEvent}>
-                  <SelectTrigger><SelectValue placeholder="Select event" /></SelectTrigger>
-                  <SelectContent>
-                    {events?.map((e) => <SelectItem key={e.id} value={e.id}>{e.title}</SelectItem>)}
-                  </SelectContent>
+                  <SelectTrigger className="rounded-xl"><SelectValue placeholder="Select event" /></SelectTrigger>
+                  <SelectContent>{events?.map((e) => <SelectItem key={e.id} value={e.id}>{e.title}</SelectItem>)}</SelectContent>
                 </Select>
               </div>
-              <div>
-                <Label className="font-body">Tier Name</Label>
-                <Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="e.g. Early Bird" />
-              </div>
+              <div><Label className="font-body text-xs">Tier Name</Label><Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="e.g. Early Bird" className="rounded-xl" /></div>
               <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <Label className="font-body">Price ($)</Label>
-                  <Input type="number" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} />
-                </div>
-                <div>
-                  <Label className="font-body">Quantity</Label>
-                  <Input type="number" value={form.quantity} onChange={(e) => setForm({ ...form, quantity: e.target.value })} />
-                </div>
+                <div><Label className="font-body text-xs">Price ($)</Label><Input type="number" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} className="rounded-xl" /></div>
+                <div><Label className="font-body text-xs">Quantity</Label><Input type="number" value={form.quantity} onChange={(e) => setForm({ ...form, quantity: e.target.value })} className="rounded-xl" /></div>
               </div>
-              <Button onClick={() => createMutation.mutate()} className="w-full font-body" disabled={!selectedEvent || !form.name}>
-                Create Ticket Tier
-              </Button>
+              <Button onClick={() => createMutation.mutate()} className="w-full font-body rounded-xl" disabled={!selectedEvent || !form.name}>Create Ticket Tier</Button>
             </div>
           </DialogContent>
         </Dialog>
-      </div>
+      </motion.div>
 
       {isLoading ? (
-        <p className="text-muted-foreground font-body">Loading...</p>
+        <div className="text-center py-16 text-muted-foreground font-body">Loading...</div>
       ) : !tickets?.length ? (
-        <p className="text-muted-foreground font-body">No ticket tiers yet. Create one for your professional events.</p>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-16">
+          <Ticket className="w-12 h-12 mx-auto text-muted-foreground/40 mb-3" />
+          <p className="text-muted-foreground font-body">No ticket tiers yet.</p>
+        </motion.div>
       ) : (
-        <div className="bg-card border border-border rounded-xl overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead className="bg-muted">
-              <tr>
-                <th className="text-left p-3 font-body font-semibold">Event</th>
-                <th className="text-left p-3 font-body font-semibold">Tier</th>
-                <th className="text-left p-3 font-body font-semibold">Price</th>
-                <th className="text-left p-3 font-body font-semibold">Qty</th>
-                <th className="text-right p-3 font-body font-semibold">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tickets.map((t) => (
-                <tr key={t.id} className="border-t border-border">
-                  <td className="p-3 font-body">{t.event_title}</td>
-                  <td className="p-3 font-body">{t.name}</td>
-                  <td className="p-3 font-body">${t.price}</td>
-                  <td className="p-3 font-body">{t.quantity}</td>
-                  <td className="p-3 text-right">
-                    <Button variant="ghost" size="sm" onClick={() => deleteMutation.mutate(t.id)}>
-                      <Trash2 className="w-3.5 h-3.5 text-destructive" />
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {tickets.map((t, i) => (
+            <motion.div
+              key={t.id}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.05 }}
+              className="bg-card border border-border/60 rounded-2xl p-5 hover:shadow-card transition-all group relative"
+            >
+              <button onClick={() => deleteMutation.mutate(t.id)} className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-destructive">
+                <Trash2 className="w-4 h-4" />
+              </button>
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet to-indigo flex items-center justify-center mb-4 shadow-sm">
+                <Ticket className="w-4 h-4 text-primary-foreground" />
+              </div>
+              <h3 className="font-display font-bold text-foreground text-sm mb-1">{t.name}</h3>
+              <p className="text-xs text-muted-foreground font-body mb-4 truncate">{t.event_title}</p>
+              <div className="flex items-center gap-4 text-xs font-body text-muted-foreground">
+                <span className="flex items-center gap-1"><DollarSign className="w-3 h-3" />${t.price}</span>
+                <span className="flex items-center gap-1"><Hash className="w-3 h-3" />{t.quantity} qty</span>
+              </div>
+            </motion.div>
+          ))}
         </div>
       )}
     </div>

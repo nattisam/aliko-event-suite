@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { Heart, CheckCircle, XCircle, HelpCircle } from "lucide-react";
+import { motion } from "framer-motion";
 
 const AdminRSVPs = () => {
   const { user } = useAuth();
@@ -21,60 +23,71 @@ const AdminRSVPs = () => {
   const noCount = rsvps?.filter((r) => r.response === "no").length ?? 0;
   const maybeCount = rsvps?.filter((r) => r.response === "maybe").length ?? 0;
 
+  const summaryCards = [
+    { label: "Attending", count: yesCount, icon: CheckCircle, gradient: "from-emerald to-teal" },
+    { label: "Declined", count: noCount, icon: XCircle, gradient: "from-rose to-coral" },
+    { label: "Maybe", count: maybeCount, icon: HelpCircle, gradient: "from-secondary to-amber" },
+  ];
+
   return (
-    <div>
-      <h1 className="text-2xl font-bold font-display text-foreground mb-6">RSVPs</h1>
+    <div className="space-y-6">
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
+        <h1 className="text-2xl font-bold font-display text-foreground">RSVPs</h1>
+        <p className="text-sm text-muted-foreground font-body mt-1">Track responses for social events</p>
+      </motion.div>
 
       {!isLoading && rsvps && rsvps.length > 0 && (
-        <div className="grid grid-cols-3 gap-4 mb-6">
-          <div className="bg-green-50 border border-green-200 rounded-xl p-4 text-center">
-            <p className="text-2xl font-bold text-green-700">{yesCount}</p>
-            <p className="text-xs text-green-600 font-body">Attending</p>
-          </div>
-          <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-center">
-            <p className="text-2xl font-bold text-red-700">{noCount}</p>
-            <p className="text-xs text-red-600 font-body">Declined</p>
-          </div>
-          <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-center">
-            <p className="text-2xl font-bold text-yellow-700">{maybeCount}</p>
-            <p className="text-xs text-yellow-600 font-body">Maybe</p>
-          </div>
+        <div className="grid grid-cols-3 gap-4">
+          {summaryCards.map((c, i) => (
+            <motion.div
+              key={c.label}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.08 }}
+              className="bg-card border border-border/60 rounded-2xl p-5 text-center hover:shadow-card transition-all"
+            >
+              <div className={`w-10 h-10 mx-auto mb-3 rounded-xl bg-gradient-to-br ${c.gradient} flex items-center justify-center shadow-sm`}>
+                <c.icon className="w-4 h-4 text-primary-foreground" />
+              </div>
+              <p className="text-3xl font-bold text-foreground">{c.count}</p>
+              <p className="text-xs text-muted-foreground font-body mt-1">{c.label}</p>
+            </motion.div>
+          ))}
         </div>
       )}
 
       {isLoading ? (
-        <p className="text-muted-foreground font-body">Loading...</p>
+        <div className="text-center py-16 text-muted-foreground font-body">Loading...</div>
       ) : !rsvps?.length ? (
-        <p className="text-muted-foreground font-body">No RSVPs yet.</p>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-16">
+          <Heart className="w-12 h-12 mx-auto text-muted-foreground/40 mb-3" />
+          <p className="text-muted-foreground font-body">No RSVPs yet.</p>
+        </motion.div>
       ) : (
-        <div className="bg-card border border-border rounded-xl overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead className="bg-muted">
-              <tr>
-                <th className="text-left p-3 font-body font-semibold">Guest</th>
-                <th className="text-left p-3 font-body font-semibold">Email</th>
-                <th className="text-left p-3 font-body font-semibold hidden md:table-cell">Event</th>
-                <th className="text-left p-3 font-body font-semibold">Response</th>
-                <th className="text-left p-3 font-body font-semibold hidden lg:table-cell">Plus One</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rsvps.map((r) => (
-                <tr key={r.id} className="border-t border-border">
-                  <td className="p-3 font-body">{r.guest_name}</td>
-                  <td className="p-3 font-body text-muted-foreground">{r.guest_email}</td>
-                  <td className="p-3 font-body hidden md:table-cell">{r.event_title}</td>
-                  <td className="p-3 font-body">
-                    <span className={`px-2 py-0.5 rounded-full text-xs ${
-                      r.response === "yes" ? "bg-green-100 text-green-800" :
-                      r.response === "no" ? "bg-red-100 text-red-800" : "bg-yellow-100 text-yellow-800"
-                    }`}>{r.response}</span>
-                  </td>
-                  <td className="p-3 font-body hidden lg:table-cell text-muted-foreground">{r.plus_one_name || "—"}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="grid gap-3">
+          {rsvps.map((r, i) => (
+            <motion.div
+              key={r.id}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.03 }}
+              className="bg-card border border-border/60 rounded-2xl p-4 flex items-center gap-4 hover:shadow-card transition-all"
+            >
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-rose to-coral flex items-center justify-center text-sm font-bold text-primary-foreground flex-shrink-0 shadow-sm">
+                {r.guest_name.charAt(0).toUpperCase()}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-body font-semibold text-foreground text-sm truncate">{r.guest_name}</p>
+                <p className="text-xs text-muted-foreground font-body truncate">{r.guest_email}</p>
+              </div>
+              <div className="hidden md:block text-xs text-muted-foreground font-body truncate max-w-[140px]">{r.event_title}</div>
+              <span className={`px-2.5 py-1 rounded-full text-[11px] font-body font-medium ${
+                r.response === "yes" ? "bg-emerald/15 text-emerald" :
+                r.response === "no" ? "bg-rose/15 text-rose" : "bg-secondary/15 text-secondary"
+              }`}>{r.response}</span>
+              {r.plus_one_name && <span className="text-[10px] text-muted-foreground font-body hidden lg:block">+1: {r.plus_one_name}</span>}
+            </motion.div>
+          ))}
         </div>
       )}
     </div>
